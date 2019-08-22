@@ -8,7 +8,7 @@ vue create [project name] 生成工程目录以及配置文件。
 
 #### 安装必要开发组件
 less，less-loade 防止css变量污染，意思就是组件之间的css不互通则防止了混乱
-npm install --save-dev less less-loade
+`npm install --save-dev less less-loade`
 
 #### 安装必要运行组件
 vue-router 路由
@@ -29,10 +29,18 @@ https://github.com/iview/iview
      1.2. config/目录
   2. 页面
      view/login/ 
+     components/main/
+     assets/  资源文件
   3. 路由
+     router/
   4. 用户数据
+     store/
   5. 后台访问API
-  6. 通讯协议
+     api/
+  6. 通讯协议及共通函数
+     libs/
+     安装axios到devDependencies
+     `npm install --save-dev less less-loade`
 
 有了这些，还需要在main.js中引入必要的组件
 ```javascript
