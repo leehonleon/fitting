@@ -83,6 +83,7 @@ Vue.use(iView, {
 #### 成功显示login和主页面drawingboard
 ![login页面成功访问](/snapshot/snipaste_20190822_103515.png "login页面")
 ![主页面drawingboard成功访问](/snapshot/snipaste_20190822_103355.png "主页面drawingboard")
+Release: https://github.com/leehonleon/fitting/releases/tag/0.1.0
 
 #### 测试用组件（测试阶段在安装）
 mockjs 生成随机数据，拦截 Ajax 请求   
