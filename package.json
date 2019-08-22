@@ -7,19 +7,31 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "// npm install [--save]": "",
   "dependencies": {
     "core-js": "^2.6.5",
-    "vue": "^2.6.10"
+    "iview": "^3.4.2",
+    "vue": "^2.6.10",
+    "vue-i18n": "^8.14.0",
+    "vue-router": "^3.1.2",
+    "vuex": "^3.1.1"
   },
+  "npm install --save-dev": "",
+  "// less + less-loade: 来防止作用域的污染": "",
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.10.0",
     "@vue/cli-plugin-eslint": "^3.10.0",
     "@vue/cli-service": "^3.10.0",
+    "axios": "^0.19.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "js-cookie": "^2.2.1",
+    "less": "^3.10.2",
+    "less-loader": "^5.0.0",
     "vue-template-compiler": "^2.6.10"
   },
+  "// ESLint 可以通过 .eslintrc 或 package.json 中的 eslintConfig 字段来配置。": "",
   "eslintConfig": {
     "root": true,
     "env": {
