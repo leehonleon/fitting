@@ -1,9 +1,8 @@
-import Main from '@/components/main'
+import word from '@/components/main/sub/word'
 // import Mainboard from '@/components/main-board'
 // import parentView from '@/components/parent-view'
 
 /**
- * iview-admin中meta除了原生参数外可配置的参数:
  * meta: {
  *  title: { String|Number|Function }
  *         显示在侧边栏、面包屑和标签栏的文字
@@ -19,57 +18,18 @@ import Main from '@/components/main'
  */
 
 export default [{
-    path: '/401',
-    name: 'error_401',
+    name: 'word',
     meta: {
-      hideInMenu: true
+      title: '文本',
+      icon: 'icon-wenzi'
     },
-    component: () => import('@/view/error-page/401.vue')
+    component: word
   },
   {
-    path: '/500',
-    name: 'error_500',
+    name: 'template',
     meta: {
-      hideInMenu: true
-    },
-    component: () => import('@/view/error-page/500.vue')
-  },
-  {
-    path: '*',
-    name: 'error_404',
-    meta: {
-      hideInMenu: true
-    },
-    component: () => import('@/view/error-page/404.vue')
-  },
-  {
-    path: '/login',
-    name: 'login',
-    meta: {
-      title: 'Login - 登录',
-      hideInMenu: true
-    },
-    component: () => import('@/view/login/login.vue')
-  },
-  {
-    path: '/',
-    name: '_mainboard',
-    redirect: '/drawingboard',
-    component: Main,
-    meta: {
-      hideInMenu: true,
-      notCache: true
-    },
-    children: [{
-      path: '/drawingboard',
-      name: 'drawingboard',
-      meta: {
-        hideInMenu: true,
-        title: '控制台',
-        notCache: true,
-        icon: 'md-home'
-      }
-    }]
-  },
-
+      title: '模板',
+      icon: 'icon-iframetianjia'
+    }
+  }
 ]
