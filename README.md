@@ -95,3 +95,5 @@ https://www.chaijs.com/
 cypress 赛普拉斯是为现代网络打造的下一代前端测试工具   
 https://docs.cypress.io/guides/overview/why-cypress.html#Cypress-ecosystem   
 
+***
+跳转到： [第二阶段](./README%20section2.md "阶段二"). 
