@@ -11,7 +11,7 @@ import {
 } from '@/libs/util'
 import config from '@/config'
 const {
-  homeName
+  homeName,
 } = config
 
 Vue.use(Router)
@@ -29,6 +29,7 @@ const turnTo = (to, access, next) => {
   }) // 无权限，重定向到401页面
 }
 
+// 全局前置守卫
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start()
   const token = getToken()
@@ -62,6 +63,7 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+// 全局后置钩子
 router.afterEach(to => {
   setTitle(to, router.app)
   iView.LoadingBar.finish()
