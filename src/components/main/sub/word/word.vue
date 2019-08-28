@@ -1,6 +1,6 @@
 <template>
   <div class="text-element">
-    <Card style="">
+    <Card>
       <p slot="title">
         <Icon custom="iconfont icon-biaoti1"></Icon>
         文字
@@ -43,28 +43,29 @@
         <Icon type="ios-arrow-dropleft" />
         返回
       </Button>
-      <div class="list-wrap" style="">
-        <div class="list-item ng-star-inserted" draggable="true" style="">
+      <draggable class="list-wrap" :sort="false">
+        <div class="list-item ng-star-inserted">
           <img src="//image.tubangzhu.com/updata/201808/10/09910f21495d869f2532.png?x-oss-process=image/resize,w_200/format,webp" style="object-fit: contain;">
           <span class="img-info-btn"><i class="iconfont icon-more"></i></span>
         </div>
-        <div class="list-item ng-star-inserted" draggable="true" style=""><img src="//image.tubangzhu.com/updata/201808/07/1304c30834cb85f7b18a.png?x-oss-process=image/resize,w_200/format,webp" style="object-fit: contain;"><span class="img-info-btn"><i class="iconfont icon-more"></i></span>
+        <div class="list-item ng-star-inserted"><img src="//image.tubangzhu.com/updata/201808/07/1304c30834cb85f7b18a.png?x-oss-process=image/resize,w_200/format,webp" style="object-fit: contain;"><span class="img-info-btn"><i class="iconfont icon-more"></i></span>
         </div>
-        <div class="list-item ng-star-inserted" draggable="true" style=""><img src="//image.tubangzhu.com/updata/201808/07/7e2652774d27521a1fe8.png?x-oss-process=image/resize,w_200/format,webp" style="object-fit: contain;"><span class="img-info-btn"><i class="iconfont icon-more"></i></span>
+        <div class="list-item ng-star-inserted"><img src="//image.tubangzhu.com/updata/201808/07/7e2652774d27521a1fe8.png?x-oss-process=image/resize,w_200/format,webp" style="object-fit: contain;"><span class="img-info-btn"><i class="iconfont icon-more"></i></span>
         </div>
-        <div class="list-item ng-star-inserted" draggable="true" style=""><img src="//image.tubangzhu.com/updata/201808/07/3644b7049160011aae33.png?x-oss-process=image/resize,w_200/format,webp" style="object-fit: contain;"><span class="img-info-btn"><i class="iconfont icon-more"></i></span>
+        <div class="list-item ng-star-inserted"><img src="//image.tubangzhu.com/updata/201808/07/3644b7049160011aae33.png?x-oss-process=image/resize,w_200/format,webp" style="object-fit: contain;"><span class="img-info-btn"><i class="iconfont icon-more"></i></span>
         </div>
-        <div class="list-item ng-star-inserted" draggable="true" style=""><img src="//image.tubangzhu.com/updata/201808/07/dfcbc9e8025abaccff8e.png?x-oss-process=image/resize,w_200/format,webp" style="object-fit: contain;"><span class="img-info-btn"><i class="iconfont icon-more"></i></span>
+        <div class="list-item ng-star-inserted"><img src="//image.tubangzhu.com/updata/201808/07/dfcbc9e8025abaccff8e.png?x-oss-process=image/resize,w_200/format,webp" style="object-fit: contain;"><span class="img-info-btn"><i class="iconfont icon-more"></i></span>
         </div>
-      </div>
+      </draggable>
     </Drawer>
   </div>
 </template>
 <script>
-
+import draggable from 'vuedraggable'
 export default {
   name: 'word',
   components: {
+    draggable
   },
   // 接收参数并验证
   props: {

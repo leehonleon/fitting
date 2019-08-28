@@ -22,7 +22,7 @@
       </Sider>
       <Layout>
         <Content>
-          <router-view />
+          <Stage />
         </Content>
       </Layout>
     </Layout>
@@ -31,10 +31,12 @@
 <script>
 import './main.less'
 import SideMenu from './sub/side-menu'
+import Stage from './sub/stage'
 export default {
   name: 'Main',
   components: {
     SideMenu,
+    Stage
   },
   data () {
     return {
