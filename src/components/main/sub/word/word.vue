@@ -1,7 +1,7 @@
 <template>
   <div class="text-element">
     <Card>
-      <p slot="title">
+      <p slot="title" @dragover="alert('at')">
         <Icon custom="iconfont icon-biaoti1"></Icon>
         文字
       </p>
@@ -43,7 +43,7 @@
         <Icon type="ios-arrow-dropleft" />
         返回
       </Button>
-      <draggable class="list-wrap" :sort="false">
+      <draggable class="list-wrap" :sort="false" :group="{ name: 'stage', pull: 'clone', put: 'false' }">
         <div class="list-item ng-star-inserted">
           <img src="//image.tubangzhu.com/updata/201808/10/09910f21495d869f2532.png?x-oss-process=image/resize,w_200/format,webp" style="object-fit: contain;">
           <span class="img-info-btn"><i class="iconfont icon-more"></i></span>

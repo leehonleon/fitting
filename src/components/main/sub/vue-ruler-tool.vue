@@ -1,5 +1,5 @@
 <template>
-  <div id="rulerTool" @dragover="delivery" @dragenter="delivery" @drop="delivery" :style="{width : windowWidth + 'px',height : windowHeight + 'px',position:position}" class="ScaleBox" onselectstart="return false;">
+  <div id="rulerTool" :style="{width : '100%',height : windowHeight + 'px',position:position}" class="ScaleBox" onselectstart="return false;">
     <section v-show="rulerToggle">
       <div id="levelRuler" class="ScaleRuler_h" @mousedown.stop="levelDragRuler">
         <span v-for="(item,index) in xScale" :key="index" :style="{left:index * 50 + 2 + 'px'}" class="n">{{ item.id }}</span>
@@ -12,7 +12,7 @@
       <div v-for="item in levelLineList" :id="item.id" :title="item.title" :style="{top:item.top+ 'px'}" :key="item.id" class="RefLine_h" @mousedown="dragLevelLine(item.id)" />
       <div v-for="item in verticalLineList" :id="item.id" :title="item.title" :style="{left:item.left+ 'px'}" :key="item.id" class="RefLine_v" @mousedown="dragVerticalLine(item.id)" />
     </section>
-    <div id="content" @dragover="delivery" @dragenter="delivery" @drop="delivery" :style="{left: contentLayout.left + 'px', top: contentLayout.top + 'px', padding: left_top+'px 0px 0px '+left_top+'px'}">
+    <div id="content" :style="{left: contentLayout.left + 'px', top: contentLayout.top + 'px', padding: left_top+'px 0px 0px '+left_top+'px',width : '100%',height : '100%'}">
       <slot />
     </div>
   </div>
