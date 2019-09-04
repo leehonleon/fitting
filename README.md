@@ -9,5 +9,5 @@ FITTING既是一个学习VUE的教程，有是一个可以通过拖拽组件的�
 ## 现在我可以干啥呢？ 学习阿。   
 看我写下来的开发笔记：
 
-跳转到： [第一阶段](./README/README%20section1.md "阶段一") … [第二阶段](./README/README%20section1.md "阶段二") …  [第三阶段](./README/README%20section1.md "阶段三") … [第四阶段](./README/README%20section4.md "阶段四"). 
+跳转到： [第一阶段](./readme/README%20section1.md "阶段一") … [第二阶段](./readme/README%20section1.md "阶段二") …  [第三阶段](./readme/README%20section1.md "阶段三") … [第四阶段](./readme/README%20section4.md "阶段四"). 
 ***
