@@ -21,9 +21,7 @@
         <SideMenu accordion ref="sideMenu" :active-name="$store.state.sidename" :collapsed="collapsed" :sidemenuList="sidemenuList" @on-change="sideMenuSelect" />
       </Sider>
       <Layout>
-        <Content>
-          <Stage />
-        </Content>
+        <Stage />
       </Layout>
     </Layout>
   </Layout>
