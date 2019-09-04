@@ -43,8 +43,8 @@ side-menu中通过路由载入了cLayout.vue, cLayout使用:list="wrapItemList" 
 到这里拖拽其实就完成了。
 
 ## 动态加载vue模板
-参考和验证了好几个方法，最终走了一条自己的路。我觉得这个路子很简单很简单。它不需要动态编译，不需要配置，甚至可以利用左右已知的组件，而不需要重新设定。    
-支持主体框架搭载的所有功能，意思就是你的`main.js`里搭载的功能它都是能用的，以为它本身就是它的一部分。
+参考和验证了好几个方法，最终走了一条自己的路。我觉得这个路子很简单很简单。它不需要动态编译，不需要配置，甚至可以利用所有已知的组件，而不需要重新设定。    
+支持主体框架搭载的所有功能，意思就是你的`main.js`里搭载的功能它都是能用的，因为它本身就是它的一部分。
 
 ```javascript
 <template>
@@ -71,9 +71,9 @@ export default {
   },
 ```
 
-这里使用的最重要的功能就是VuE提供的异步加载功能。这段代码只有运行的时候才会从项目目录中找到对应的组件加载进来。   
-加载后组件的名字为idx所指定的值， 假设idx 的值为 `lay-abc'` 那么这个组件的名字就叫 `'lay-abc'`    
-当使用动态组件标签`<component :is="currentTabComponent" :id="getId" />` 时，只要让`currentTabComponent='lay-abc'`就可以了。 
+这里使用的最重要的功能就是VUE提供的异步加载功能。这段代码只有运行的时候才会从项目目录中找到对应的组件加载进来。   
+加载后组件的名字为idx所指定的值， 假设idx的值为 `'lay-abc'` 那么这个组件的名字就叫 `'lay-abc'`    
+当使用动态组件标签`<component :is="currentTabComponent"/>` 时，只要让`currentTabComponent='lay-abc'`就可以了。  
 Very Easy    
 ```java
 Vue.component(idx, function (resolve) {
