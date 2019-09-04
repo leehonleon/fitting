@@ -25,8 +25,8 @@
         <Icon type="ios-arrow-dropleft" />
         返回
       </Button>
-      <draggable class="list-wrap" :sort="false" :group="{ name: 'stage', pull: 'clone', put: 'false' }">
-        <div class="list-item ng-star-inserted" v-for="wrapItem of wrapItemList" :key="wrapItem.index" :wrapItemName="wrapItem.name">
+      <draggable class="list-wrap" :list="wrapItemList" :sort="false" :group="{ name: 'stage', pull: 'clone', put: 'false' }">
+        <div class="list-item ng-star-inserted" v-for="wrapItem of wrapItemList" :key="wrapItem.index">
           <img :src="`${imgPath}/${wrapItem.src}`" style="object-fit: contain;">
           <span class="img-info-btn"><i class="wrapItem.icon"></i></span>
         </div>
@@ -35,6 +35,7 @@
   </div>
 </template>
 <script>
+// import draggable from '@/libs/inner-dragable/vuedragable'
 import draggable from 'vuedraggable'
 export default {
   name: 'cLayout',
@@ -58,15 +59,31 @@ export default {
         { idx: "cell", icon: "ivu-icon ivu-icon-ios-list-box-outline", componetName: "Cell", itemName: "单元格" }],
       wrapItemListAll: {
         grid: [
-          { idx: "szx", src: "snipaste_20190829_171233.png", name: "" },
-          { idx: "szzx", src: "snipaste_20190829_171358.png", name: "" },
-          { idx: "syzx", src: "snipaste_20190829_171342.png", name: "" },
-          { idx: "yszx", src: "snipaste_20190829_172038.png", name: "" }],
+          { idx: "layout-szx", src: "snipaste_20190829_171233.png", name: "layout-szx" },
+          { idx: "layout-szzx", src: "snipaste_20190829_171358.png", name: "layout-szzx" },
+          { idx: "layout-syzx", src: "snipaste_20190829_171342.png", name: "layout-syzx" },
+          { idx: "layout-zszx", src: "snipaste_20190829_172038.png", name: "layout-zszx" }
+        ],
         layut: [
           { idx: "szx", src: "snipaste_20190829_171233.png", name: "" }
         ],
+        card: [
+          { idx: "szx", src: "snipaste_20190829_171233.png", name: "" }
+        ],
+        collapse: [
+          { idx: "szx", src: "snipaste_20190829_171233.png", name: "" }
+        ],
+        split: [
+          { idx: "szx", src: "snipaste_20190829_171233.png", name: "" }
+        ],
+        divider: [
+          { idx: "szx", src: "snipaste_20190829_171233.png", name: "" }
+        ],
+        cell: [
+          { idx: "szx", src: "snipaste_20190829_171233.png", name: "" }
+        ],
       },
-      wrapItemList: Object
+      wrapItemList: []
     }
   },
   methods: {
@@ -76,6 +93,9 @@ export default {
     choseItem (itemName) {
       this.wrapItemList = this.wrapItemListAll[itemName]
       this.detailContent = true
+    },
+    initComp () {
+      return null
     }
   },
   computed: {
