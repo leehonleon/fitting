@@ -56,7 +56,7 @@ https://cli.vuejs.org/zh/config/#configurewebpack
 https://webpack.docschina.org/configuration/devtool/   
 
 ## 完成效果   
-![侧边栏显示](snapshot/scetion2_snapshot.gif "侧边栏")
+![侧边栏显示](../snapshot/scetion2_snapshot.gif "侧边栏")
 
 
 ## 知识
@@ -74,3 +74,5 @@ https://webpack.docschina.org/configuration/devtool/
 3. `<keep-alive>` 动态组件懒加载     
    https://cn.vuejs.org/v2/guide/components-dynamic-async.html#%E5%9C%A8%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6%E4%B8%8A%E4%BD%BF%E7%94%A8-keep-alive
 
+***
+跳转到： [第一阶段](./README%20section1.md "阶段一") … [第三阶段](./README%20section3.md "阶段三"). 
