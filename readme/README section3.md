@@ -83,3 +83,9 @@ Vue.component(idx, function (resolve) {
 
 `<component>`标签几乎可以加载所有能被识别的组件了。   
 
+***
+#效果展示
+![拖拽生成组件效果](../snapshot/scetion3_snapshot.gif "拖拽生成组件效果")
+
+***
+跳转到： [第二阶段](./README%20section2.md "阶段二") … [第四阶段](./README%20section4.md "阶段四"). 
