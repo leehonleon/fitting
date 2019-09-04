@@ -3,35 +3,9 @@
 }
 
 .stage-container {
-  .t-ruler.show {
-    opacity: 1;
+  .stage-panel {
+    height: 100%;
+    overflow: auto;
   }
 
-  .t-ruler {
-    position: relative;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    opacity: 0;
-    z-index: 20;
-  }
-
-  .t-ruler .ruler.horizontal {
-    left: 18px;
-    top: 0;
-  }
-
-  .t-ruler .ruler.show {
-    visibility: visible;
-  }
-
-  .t-ruler .ruler {
-    position: absolute;
-    background-color: #f8f8f8;
-    pointer-events: auto;
-    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
-    visibility: hidden;
-  }
 }

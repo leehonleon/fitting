@@ -3,10 +3,10 @@
     <slot></slot>
     <Layout :style="{minHeight: '100vh'}">
       <Sider width="44">
-        <Menu mode="horizontal" theme="dark" active-key="1" width="auto" class="css_menu_left" @on-select="handleSelect">
+        <Menu mode="horizontal" theme="dark" :active-name="activeMenuName" active-key="1" width="auto" class="css_menu_left" @on-select="handleSelect">
           <template v-for="item in sidemenuList">
             <MenuItem :key="item.name" :name="item.name" :handle="item">
-            <Icon :custom="`iconfont ${item.meta.icon}`" size="24" />
+            <Icon :custom="item.meta.icon" size="24" />
             </MenuItem>
           </template>
         </Menu>
@@ -39,12 +39,19 @@ export default {
     },
     collapsed: {
       type: Boolean
+    },
+    activeMenuName: {
+      type: String,
+      default () {
+        return ''
+      }
     }
   },
   data () {
     return {
       openedNames: [],
-      v_sidemenu: ""
+      v_sidemenu: "",
+      preActiveMenuName: ""
     }
   },
   methods: {
@@ -58,7 +65,11 @@ export default {
       }
       if (!component) return
       this.v_sidemenu = component
-      this.$emit('on-change', !this.collapsed)
+      if (this.preActiveMenuName === name) {
+        this.$emit('on-change', !this.collapsed)
+      } else {
+        this.preActiveMenuName = name
+      }
     },
   },
   computed: {
