@@ -1,6 +1,6 @@
 <template>
   <div class="stage-container">
-    <vue-ruler-tool :content-layout="{left:0,top:0}" :is-scale-revise="true" :preset-line="presetLine" :is-hot-key="true">
+    <vue-ruler-tool :content-layout="{left:0,top:0}" :is-scale-revise="true" :is-hot-key="true">
       <draggable class="stage-panel" group="stage" :list="stageComponents">
         <StageComponetBridge v-for="(element,index) in stageComponents" :key="index" :idx="element.idx" />
       </draggable>

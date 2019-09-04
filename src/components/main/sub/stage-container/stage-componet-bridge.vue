@@ -1,16 +1,10 @@
 <template>
   <div class="stage-componet-bridge" :id="getId">
-    <component :is="currentTabComponent" :id="getId" />
+    <component :is="currentTabComponent" />
   </div>
 </template>
 <script>
 import Vue from 'vue';
-// Vue.component('layout_szx', function (resolve) {
-//   require(['_c/template/iView-UI/layout-szx.vue'], resolve)
-// })
-// Vue.component('layout_szzx', function (resolve) {
-//   require(['_c/template/iView-UI/layout-szzx.vue'], resolve)
-// })
 import { getUuid } from '@/libs/util'
 export default {
   name: 'StageComponetBridge',

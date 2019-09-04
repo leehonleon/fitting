@@ -94,12 +94,6 @@ export default {
       this.wrapItemList = this.wrapItemListAll[itemName]
       this.detailContent = true
     },
-    wrapItemDragStart (evt) {
-      // console.log(evt)
-    },
-    wrapItemSetData (dataTransfer) {
-      // dataTransfer.setData('aaa', 'dd')
-    },
     initComp () {
       return null
     }
