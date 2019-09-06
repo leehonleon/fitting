@@ -1,25 +1,34 @@
 <template>
-  <div class="stage-componet-bridge" :id="getId">
-    <component :is="currentTabComponent" />
+  <component :is="currentTabComponent" :tasks="tasks" />
+  <!--
+  <div class="stage-componet-bridge" :id="getId" @mouseover="overBridge" @mouseout="outBridge" :class="{ over: over}">
   </div>
+  -->
 </template>
 <script>
 import Vue from 'vue';
+import draggable from "vuedraggable";
 import { getUuid } from '@/libs/util'
 export default {
   name: 'StageComponetBridge',
   components: {
+    draggable
   },
   // 接收参数并验证
   props: {
     idx: {
       type: String,
       default: ''
-    }
+    },
+    tasks: {
+      type: Array,
+      default: () => []
+    },
   },
   data () {
     return {
-      triger: ''
+      triger: '',
+      over: false,
     }
   },
   created () {
@@ -30,7 +39,13 @@ export default {
     },
     hasComponent (compName) {
       return this.$root.$options.components[compName]
-    }
+    },
+    overBridge () {
+      this.over = true
+    },
+    outBridge () {
+      this.over = false
+    },
   },
   computed: {
     getId () {
@@ -54,4 +69,9 @@ export default {
 }
 </script>
 <style lang="less">
+.over {
+  box-shadow: 2px 2px 3px #888888;
+  border: 1px dashed seagreen;
+  margin: 1px;
+}
 </style>

@@ -65,7 +65,16 @@ export default {
           { idx: "layout-zszx", src: "snipaste_20190829_172038.png", name: "layout-zszx" }
         ],
         layut: [
-          { idx: "szx", src: "snipaste_20190829_171233.png", name: "" }
+          { idx: "layout-single", src: "snipaste_20190905_220042.png", name: "layout-single", tasks: [] },
+          { idx: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header", tasks: [] },
+          { idx: "layout-content", src: "snipaste_20190905_215926.png", name: "layout-content", tasks: [] },
+          { idx: "layout-footer", src: "snipaste_20190905_220010.png", name: "layout-footer", tasks: [] },
+          { idx: "layout-sider-left", src: "snipaste_20190905_220655.png", name: "layout-sider-left", tasks: [] },
+          { idx: "layout-sider-right", src: "snipaste_20190905_220655.png", name: "layout-sider-right", tasks: [] },
+          { idx: "layout-szx", src: "snipaste_20190829_171233.png", name: "layout-szx", tasks: [] },
+          { idx: "layout-szzx", src: "snipaste_20190829_171358.png", name: "layout-szzx", tasks: [] },
+          { idx: "layout-syzx", src: "snipaste_20190829_171342.png", name: "layout-syzx", tasks: [] },
+          { idx: "layout-zszx", src: "snipaste_20190829_172038.png", name: "layout-zszx", tasks: [] }
         ],
         card: [
           { idx: "szx", src: "snipaste_20190829_171233.png", name: "" }
