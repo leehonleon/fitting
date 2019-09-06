@@ -1,7 +1,10 @@
 <template>
   <div class="stage-container">
     <vue-ruler-tool :content-layout="{left:0,top:0}" :is-scale-revise="true" :is-hot-key="true">
-      <NestedDraggable class="stage-panel" :tasks="stageComponents" placeholder="拖拽组件上来看看" />
+      <div class="stage-panel" v-sortable="sortableOption">
+        <!-- <NestedDraggable :tasks="stageComponents" placeholder="拖拽组件上来看看" /> -->
+
+      </div>
     </vue-ruler-tool>
   </div>
 </template>
@@ -11,12 +14,12 @@ import VueRulerTool from '../vue-ruler-tool.vue'
 // import draggable from '@/libs/inner-dragable/vuedragable'
 import NestedDraggable from '@/components/club/nested.vue'
 // import draggable from 'vuedraggable'
-// import StageComponetBridge from './stage-componet-bridge.vue'
+import StageComponetBridge from './stage-componet-bridge.vue'
 export default {
   name: 'StageContainer',
   components: {
     VueRulerTool,
-    // draggable,
+    StageComponetBridge,
     NestedDraggable
 
   },
@@ -31,7 +34,9 @@ export default {
   methods: {
   },
   computed: {
-
+    sortableOption () {
+      return this.$config.sortableOption.stageOptions
+    }
   },
   watch: {
   },

@@ -5,14 +5,22 @@ import store from './store'
 import iView from 'iview'
 import i18n from '@/locale'
 import config from '@/config'
+import Sortable from '@/libs/vue-sortable'
 
 // 载入Style
 import './index.less'
 import '@/assets/icons/iconfont.css'
 
+/**
+ * @description 给VUE环境挂载iView
+ */
 Vue.use(iView, {
   i18n: (key, value) => i18n.t(key, value)
 })
+/**
+ * @description 给VUE环境挂载Sortable
+ */
+Vue.use(Sortable)
 /**
  * @description 生产环境关掉提示
  */
