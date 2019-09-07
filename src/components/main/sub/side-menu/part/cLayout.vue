@@ -25,7 +25,7 @@
         <Icon type="ios-arrow-dropleft" />
         返回
       </Button>
-      <div class="list-wrap" v-sortable="sortableOption">
+      <div class="list-wrap" v-sortable="sortableOption" @start="back">
         <div class="list-item ng-star-inserted" v-for="wrapItem of wrapItemList" :key="wrapItem.index">
           <img :src="`${imgPath}/${wrapItem.src}`" style="object-fit: contain;">
           <span class="img-info-btn"><i class="wrapItem.icon"></i></span>
