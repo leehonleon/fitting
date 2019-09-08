@@ -1,4 +1,4 @@
-import sortableOption from './sortable'
+import sortableOption from './sortable-options'
 export default {
   /**
    * @description 配置显示在浏览器标签的title

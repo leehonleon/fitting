@@ -25,8 +25,8 @@
         <Icon type="ios-arrow-dropleft" />
         返回
       </Button>
-      <div class="list-wrap" v-sortable="sortableOption" @start="back">
-        <div class="list-item ng-star-inserted" v-for="wrapItem of wrapItemList" :key="wrapItem.index">
+      <div class="list-wrap" v-sortable="sortableOption" @start="dragStart">
+        <div class="list-item ng-star-inserted" v-for="wrapItem of wrapItemList" :key="wrapItem.idx">
           <img :src="`${imgPath}/${wrapItem.src}`" style="object-fit: contain;">
           <span class="img-info-btn"><i class="wrapItem.icon"></i></span>
         </div>
@@ -105,11 +105,20 @@ export default {
     },
     initComp () {
       return null
+    },
+    dragStart (evt) {
+      let componentName = evt.target.getAttribute('data-name')
+      let info = {
+        name: componentName,
+      }
+      evt.dataTransfer.setData('info', JSON.stringify(info))
     }
   },
   computed: {
     sortableOption () {
-      return this.$config.sortableOption.listOptions
+      let sortableOption = this.$config.sortableOption.listOptions
+      sortableOption = { 'onStart': this.dragStart, ...sortableOption }
+      return sortableOption
     }
   },
   watch: {
