@@ -1,23 +1,27 @@
 <template>
   <div class="stage-container">
     <vue-ruler-tool :content-layout="{left:0,top:0}" :is-scale-revise="true" :is-hot-key="true">
-      <NestedDraggable class="stage-panel" :tasks="stageComponents" placeholder="拖拽组件上来看看" />
+      <Draggable class="stage-panel" :list="stageComponents" :group="{ name: 'stage' }">
+        <span v-if="stageComponents.length===0">从左侧拖拽组件进来</span>
+        <StageComponetBridge v-for="(element,index) in stageComponents" :key="index" :idx="element.idx" :tasks="element.tasks" />
+      </Draggable>
     </vue-ruler-tool>
   </div>
 </template>
 <script>
 // import VueRulerTool from 'vue-ruler-tool'
 import VueRulerTool from '../vue-ruler-tool.vue'
-// import draggable from '@/libs/inner-dragable/vuedragable'
-import NestedDraggable from '@/components/club/nested.vue'
-// import draggable from 'vuedraggable'
-// import StageComponetBridge from './stage-componet-bridge.vue'
+import Draggable from '@/libs/inner-draggable/vuedraggable'
+// import NestedDraggable from '@/components/club/nested.vue'
+// import Draggable from 'vuedraggable'
+import StageComponetBridge from './stage-componet-bridge.vue'
 export default {
   name: 'StageContainer',
   components: {
     VueRulerTool,
-    // draggable,
-    NestedDraggable
+    Draggable,
+    // NestedDraggable
+    StageComponetBridge
 
   },
   // 接收参数并验证

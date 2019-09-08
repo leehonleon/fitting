@@ -1,10 +1,9 @@
 <template>
-  <Layout style="height: 100%;">
-    <NestedDraggable :task="layoutCmp" placeholder="Layout" />
+  <Layout style="height: 100%; background-color:black;" NestedDraggable placeholder="Layout">
   </Layout>
 </template>
 <script>
-import NestedDraggable from '@/components/club/nested.vue'
+// import NestedDraggable from '@/components/club/nested.vue'
 export default {
   props: {
     tasks: {
@@ -12,7 +11,7 @@ export default {
     }
   },
   components: {
-    NestedDraggable
+    // NestedDraggable
   },
   computed: {
     layoutCmp () {

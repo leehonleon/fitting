@@ -25,22 +25,22 @@
         <Icon type="ios-arrow-dropleft" />
         返回
       </Button>
-      <draggable class="list-wrap" :list="wrapItemList" :sort="false" :group="{ name: 'stage', pull: 'clone', put: 'false' }">
+      <Draggable class="list-wrap" :list="wrapItemList" :sort="false" :group="{ name: 'stage', pull: 'clone', put: 'false' }">
         <div class="list-item ng-star-inserted" v-for="wrapItem of wrapItemList" :key="wrapItem.index">
           <img :src="`${imgPath}/${wrapItem.src}`" style="object-fit: contain;">
           <span class="img-info-btn"><i class="wrapItem.icon"></i></span>
         </div>
-      </draggable>
+      </Draggable>
     </Drawer>
   </div>
 </template>
 <script>
-// import draggable from '@/libs/inner-dragable/vuedragable'
-import draggable from 'vuedraggable'
+import Draggable from '@/libs/inner-draggable/vuedraggable'
+// import draggable from 'vuedraggable'
 export default {
   name: 'cLayout',
   components: {
-    draggable
+    Draggable
   },
   // 接收参数并验证
   props: {

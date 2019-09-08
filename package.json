@@ -31,6 +31,7 @@
     "js-cookie": "^2.2.1",
     "less": "^3.10.2",
     "less-loader": "^5.0.0",
+    "mockjs": "^1.0.1-beta3",
     "vue-template-compiler": "^2.6.10"
   },
   "// ESLint 可以通过 .eslintrc 或 package.json 中的 eslintConfig 字段来配置。": "",
