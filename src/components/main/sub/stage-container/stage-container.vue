@@ -10,7 +10,7 @@
 <script>
 // import VueRulerTool from 'vue-ruler-tool'
 import VueRulerTool from '../vue-ruler-tool.vue'
-import Draggable from '@/libs/inner-draggable/vuedraggable'
+import Draggable from '@/libs/inner-draggable/draggable'
 // import NestedDraggable from '@/components/club/nested.vue'
 // import Draggable from 'vuedraggable'
 import StageComponetBridge from './stage-componet-bridge.vue'
