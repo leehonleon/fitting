@@ -1,28 +1,20 @@
 <template>
   <Layout>
     <Content>
-      <NestedDraggable :task="siderCmp" placeholder="Content" />
+      <slot name="sontent">Content</slot>
     </Content>
     <Sider hide-trigger>
-      <NestedDraggable :task="siderCmp" placeholder="Sider" />
+      <slot name="sider">Sider</slot>
     </Sider>
   </Layout>
 </template>
 <script>
-import NestedDraggable from '@/components/club/nested.vue'
 export default {
   props: {
-    tasks: {
-      required: true,
-    }
   },
   components: {
-    NestedDraggable
   },
   computed: {
-    siderCmp () {
-      return this.tasks.length !== 0 && this.tasks['sider'] ? this.tasks['sider'] : []
-    }
   }
 }
 </script>

@@ -1,5 +1,10 @@
 import Sortable from "sortablejs";
-import { insertNodeAt, camelize, console, removeNode } from "./util/helper";
+import {
+  insertNodeAt,
+  camelize,
+  console,
+  removeNode
+} from "./util/helper";
 
 function buildAttribute(object, propName, value) {
   if (value === undefined) {
@@ -23,9 +28,13 @@ function computeIndexes(slots, children, isTransition, footerOffset) {
 
   const elmFromNodes = slots.map(elt => elt.elm);
   const footerIndex = children.length - footerOffset;
-  const rawIndexes = [...children].map((elt, idx) =>
+  // 为了适应动态component加载之前没有根节点的问题，这里简单修改一下。
+  // const rawIndexes = [...children].map((elt, idx) =>
+  //   idx >= footerIndex ? elmFromNodes.length : elmFromNodes.indexOf(elt)
+  // );
+  const rawIndexes = [...elmFromNodes].map((elt, idx) =>
     idx >= footerIndex ? elmFromNodes.length : elmFromNodes.indexOf(elt)
-  );
+  )
   return isTransition ? rawIndexes.filter(ind => ind !== -1) : rawIndexes;
 }
 
@@ -50,7 +59,9 @@ function isTransition(slots) {
   if (!slots || slots.length !== 1) {
     return false;
   }
-  const [{ componentOptions }] = slots;
+  const [{
+    componentOptions
+  }] = slots;
   if (!componentOptions) {
     return false;
   }
@@ -74,7 +85,11 @@ function computeChildrenAndOffsets(children, slot, scopedSlot) {
     footerOffset = footer.length;
     children = children ? [...children, ...footer] : [...footer];
   }
-  return { children, headerOffset, footerOffset };
+  return {
+    children,
+    headerOffset,
+    footerOffset
+  };
 }
 
 function getComponentAttributes($attrs, componentData) {
@@ -93,7 +108,11 @@ function getComponentAttributes($attrs, componentData) {
   if (!componentData) {
     return attributes;
   }
-  const { on, props, attrs: componentDataAttrs } = componentData;
+  const {
+    on,
+    props,
+    attrs: componentDataAttrs
+  } = componentData;
   update("on", on);
   update("props", props);
   Object.assign(attributes.attrs, componentDataAttrs);
@@ -165,7 +184,11 @@ const draggableComponent = {
   render(h) {
     const slots = this.$slots.default;
     this.transitionMode = isTransition(slots);
-    const { children, headerOffset, footerOffset } = computeChildrenAndOffsets(
+    const {
+      children,
+      headerOffset,
+      footerOffset
+    } = computeChildrenAndOffsets(
       slots,
       this.$slots,
       this.$scopedSlots
@@ -273,7 +296,9 @@ const draggableComponent = {
   methods: {
     // 用于判断是否是组件类
     getIsFunctional() {
-      const { fnOptions } = this._vnode;
+      const {
+        fnOptions
+      } = this._vnode;
       return fnOptions && fnOptions.functional;
     },
 
@@ -323,10 +348,15 @@ const draggableComponent = {
         return null;
       }
       const element = this.realList[index];
-      return { index, element };
+      return {
+        index,
+        element
+      };
     },
 
-    getUnderlyingPotencialDraggableComponent({ __vue__: vue }) {
+    getUnderlyingPotencialDraggableComponent({
+      __vue__: vue
+    }) {
       if (
         !vue ||
         !vue.$options ||
@@ -377,13 +407,21 @@ const draggableComponent = {
       this.alterList(updatePosition);
     },
 
-    getRelatedContextFromMoveEvent({ to, related }) {
+    getRelatedContextFromMoveEvent({
+      to,
+      related
+    }) {
       const component = this.getUnderlyingPotencialDraggableComponent(to);
       if (!component) {
-        return { component };
+        return {
+          component
+        };
       }
       const list = component.realList;
-      const context = { list, component };
+      const context = {
+        list,
+        component
+      };
       if (to !== related && list && component.getUnderlyingVm) {
         const destination = component.getUnderlyingVm(related);
         if (destination) {
@@ -427,10 +465,16 @@ const draggableComponent = {
       }
       removeNode(evt.item);
       const newIndex = this.getVmIndex(evt.newIndex);
+      // const newIndex = evt.newIndex;
       this.spliceList(newIndex, 0, element);
       this.computeIndexes();
-      const added = { element, newIndex };
-      this.emitChanges({ added });
+      const added = {
+        element,
+        newIndex
+      };
+      this.emitChanges({
+        added
+      });
     },
 
     onDragRemove(evt) {
@@ -441,9 +485,14 @@ const draggableComponent = {
       }
       const oldIndex = this.context.index;
       this.spliceList(oldIndex, 1);
-      const removed = { element: this.context.element, oldIndex };
+      const removed = {
+        element: this.context.element,
+        oldIndex
+      };
       this.resetTransitionData(oldIndex);
-      this.emitChanges({ removed });
+      this.emitChanges({
+        removed
+      });
     },
 
     onDragUpdate(evt) {
@@ -452,8 +501,14 @@ const draggableComponent = {
       const oldIndex = this.context.index;
       const newIndex = this.getVmIndex(evt.newIndex);
       this.updatePosition(oldIndex, newIndex);
-      const moved = { element: this.context.element, oldIndex, newIndex };
-      this.emitChanges({ moved });
+      const moved = {
+        element: this.context.element,
+        oldIndex,
+        newIndex
+      };
+      this.emitChanges({
+        moved
+      });
     },
 
     updateProperty(evt, propertyName) {
@@ -471,9 +526,9 @@ const draggableComponent = {
       const currentDOMIndex = domChildren.indexOf(evt.related);
       const currentIndex = relatedContext.component.getVmIndex(currentDOMIndex);
       const draggedInList = domChildren.indexOf(draggingElement) !== -1;
-      return draggedInList || !evt.willInsertAfter
-        ? currentIndex
-        : currentIndex + 1;
+      return draggedInList || !evt.willInsertAfter ?
+        currentIndex :
+        currentIndex + 1;
     },
 
     onDragMove(evt, originalEvent) {
@@ -485,7 +540,9 @@ const draggableComponent = {
       const relatedContext = this.getRelatedContextFromMoveEvent(evt);
       const draggedContext = this.context;
       const futureIndex = this.computeFutureIndex(relatedContext, evt);
-      Object.assign(draggedContext, { futureIndex });
+      Object.assign(draggedContext, {
+        futureIndex
+      });
       const sendEvt = Object.assign({}, evt, {
         relatedContext,
         draggedContext

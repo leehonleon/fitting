@@ -1,16 +1,23 @@
 <template>
   <Layout class="">
-    <Header>Header</Header>
+    <Header>
+      <slot name="header">Header</slot>
+    </Header>
     <Layout>
-      <Sider hide-trigger>Sider</Sider>
-      <Content>Content</Content>
+      <Sider hide-trigger>
+        <slot name="sider">Sider</slot>
+      </Sider>
+      <Content>
+        <slot name="content">Content</slot>
+      </Content>
     </Layout>
-    <Footer>Footer</Footer>
+    <Footer>
+      <slot name="sider">Footer</slot>
+    </Footer>
   </Layout>
 </template>
 <script>
 export default {
-
 }
 </script>
 <style lang="less" scoped>

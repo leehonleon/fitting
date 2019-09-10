@@ -1,18 +1,13 @@
 <template>
   <Footer>
-    <NestedDraggable :task="footerCmp" placeholder="Footer" />
+    <slot>Footer</slot>
   </Footer>
 </template>
 <script>
-import NestedDraggable from '@/components/club/nested.vue'
 export default {
   props: {
-    tasks: {
-      required: true,
-    }
   },
   components: {
-    NestedDraggable
   },
   computed: {
     footerCmp () {

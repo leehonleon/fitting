@@ -1,11 +1,18 @@
 <template>
-  <component :is="currentTabComponent" :tasks="tasks" />
-  <!--
-  <div class="stage-componet-bridge" :id="getId" @mouseover="overBridge" @mouseout="outBridge" :class="{ over: over}">
-  </div>
-  -->
+  <component ref="innerComponet" :is="currentTabComponent">
+    <template v-slot="name" v-for="(task,name) of slots">
+      <template v-if="typeof task ==='string'">
+        {{task}}
+      </template>
+      <template v-else>
+        <StageComponetBridge v-for="(element,index) in task" :key="index" :idx="element.idx" :slots="element.slots" />
+      </template>
+    </template>
+  </component>
 </template>
 <script>
+// <div ref="bridge" class="stage-componet-bridge">
+// </div>
 import Vue from 'vue';
 import draggable from "vuedraggable";
 import { getUuid } from '@/libs/util'
@@ -20,9 +27,8 @@ export default {
       type: String,
       default: ''
     },
-    tasks: {
-      type: Array,
-      default: () => []
+    slots: {
+      default: ''
     },
   },
   data () {
@@ -64,7 +70,6 @@ export default {
   watch: {
   },
   mounted () {
-
   }
 }
 </script>

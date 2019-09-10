@@ -2,8 +2,7 @@
   <div class="stage-container">
     <vue-ruler-tool :content-layout="{left:0,top:0}" :is-scale-revise="true" :is-hot-key="true">
       <Draggable class="stage-panel" :list="stageComponents" :group="{ name: 'stage' }">
-        <span v-if="stageComponents.length===0">从左侧拖拽组件进来</span>
-        <StageComponetBridge v-for="(element,index) in stageComponents" :key="index" :idx="element.idx" :tasks="element.tasks" />
+        <StageComponetBridge v-for="(element,index) in stageComponents" :key="index" :idx="element.idx" :slots="element.slots" />
       </Draggable>
     </vue-ruler-tool>
   </div>
@@ -33,6 +32,19 @@ export default {
     }
   },
   methods: {
+    dragMovingEnter (evt) {
+      // 当可拖动的元素进入可放置的目标高亮目标节点
+      if (evt.target.className == "dragRootTag") {
+        evt.target.style.background = "purple";
+      }
+    },
+    dragMovingLeave (evt) {
+      // 当拖动元素离开可放置目标节点，重置其背景
+      if (evt.target.className == "dragRootTag") {
+        evt.target.style.background = "";
+      }
+    }
+
   },
   computed: {
 

@@ -1,37 +1,23 @@
 <template>
   <Layout>
     <Header>
-      <NestedDraggable :task="headerCmp" placeholder="Header" />
+      <slot name="header">Header</slot>
     </Header>
     <Content>
-      <NestedDraggable :task="contentCmp" placeholder="Content" />
+      <slot name="content">Content</slot>
     </Content>
     <Footer>
-      <NestedDraggable :task="footerCmp" placeholder="Footer" />
+      <slot name="sider">Footer</slot>
     </Footer>
   </Layout>
 </template>
 <script>
-import NestedDraggable from '@/components/club/nested.vue'
 export default {
   props: {
-    tasks: {
-      required: true,
-    }
   },
   components: {
-    NestedDraggable
   },
   computed: {
-    headerCmp () {
-      return this.tasks.length !== 0 && this.tasks['header'] ? this.tasks['header'] : []
-    },
-    contentCmp () {
-      return this.tasks.length !== 0 && this.tasks['content'] ? this.tasks['content'] : []
-    },
-    footerCmp () {
-      return this.tasks.length !== 0 && this.tasks['footer'] ? this.tasks['footer'] : []
-    }
   }
 }
 </script>

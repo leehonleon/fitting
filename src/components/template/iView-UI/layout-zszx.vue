@@ -1,10 +1,18 @@
 <template>
   <Layout>
-    <Sider hide-trigger>Sider</Sider>
+    <Sider hide-trigger>
+      <slot name="sider">Sider</slot>
+    </Sider>
     <Layout>
-      <Header>Header</Header>
-      <Content>Content</Content>
-      <Footer>Footer</Footer>
+      <Header>
+        <slot name="header">Header</slot>
+      </Header>
+      <Content>
+        <slot name="content">Content</slot>
+      </Content>
+      <Footer>
+        <slot name="sider">Footer</slot>
+      </Footer>
     </Layout>
   </Layout>
 </template>

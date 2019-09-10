@@ -15,6 +15,46 @@
   - 在任意节点添加属性`v-sortable`
   - 将 Sortable 的配置属性`options`付给`v-sortable`就可以。关于`options`则参考[sortablejs 网站](https://github.com/SortableJS/Sortable)
 
+经过实验,仍然不能满足要求。所以问题仍在。
+
+## 转折~~~里程碑： 使用嵌套的StageComponetBridge加slot的结构，实现了数据模型转动态组件解析。
+查看`stage-componet-bridge.vue`如下面代码，配合数据1，非常漂亮的完成了模板嵌套渲染和默认slot的显示。    
+代码
+  ```html
+    <component ref="innerComponet" :is="currentTabComponent">
+      <template v-slot="name" v-for="(task,name) of slots">
+        <template v-if="typeof task ==='string'">
+          {{task}}
+        </template>
+        <template v-else>
+          <StageComponetBridge v-for="(element,index) in task" :key="index" :idx="element.idx" :slots="element.slots" />
+        </template>
+      </template>
+    </component>
+  ```
+数据1
+  ```JavaScript
+  {
+    idx: "layout-single", src: "snipaste_20190905_220042.png", name: "layout-single",
+    slots:
+    {
+      default:
+        [{ idx: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header", },
+        { idx: "layout-sider-left", src: "snipaste_20190905_220655.png", name: "layout-sider-left", slots: {} },
+        { idx: "layout-footer", src: "snipaste_20190905_220010.png", name: "layout-footer", slots: {} }]
+    }
+  }
+  ```
+  **当然还要配合动态组件渲染代码和模板组件**
+layout-single 组件
+  ```html
+  <template>
+    <Layout style="height: 100%; background-color:black;">
+      <slot>Layout</slot>
+    </Layout>
+  </template>
+  ```
+
 ### 一些知识
 
 - Vue: 组织代码
