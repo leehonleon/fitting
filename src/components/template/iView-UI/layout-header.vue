@@ -1,5 +1,5 @@
 <template>
-  <Header>
+  <Header dragarea>
     <slot>Header</slot>
   </Header>
 </template>
@@ -11,7 +11,8 @@ export default {
   },
   computed: {
 
-  }
+  },
+
 }
 </script>
 <style lang="less" scoped>

@@ -1,5 +1,5 @@
 <template>
-  <Footer>
+  <Footer dragarea>
     <slot>Footer</slot>
   </Footer>
 </template>
