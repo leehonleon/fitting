@@ -4,15 +4,10 @@
   </Footer>
 </template>
 <script>
+import { setDragarea } from '@/libs/util/'
 export default {
-  props: {
-  },
-  components: {
-  },
-  computed: {
-    footerCmp () {
-      return this.tasks.length !== 0 && this.tasks['footer'] ? this.tasks['footer'] : []
-    }
+  mounted () {
+    setDragarea(this)
   }
 }
 </script>

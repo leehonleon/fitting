@@ -1,24 +1,27 @@
 <template>
   <Layout>
-    <Sider hide-trigger>
+    <Sider hide-trigger dragarea=".ivu-layout-sider-children" slotname="sider">
       <slot name="sider">Sider</slot>
     </Sider>
     <Layout>
-      <Header>
+      <Header dragarea slotname="header">
         <slot name="header">Header</slot>
       </Header>
-      <Content>
+      <Content dragarea slotname="content">
         <slot name="content">Content</slot>
       </Content>
-      <Footer>
-        <slot name="sider">Footer</slot>
+      <Footer dragarea slotname="footer">
+        <slot name="footer">Footer</slot>
       </Footer>
     </Layout>
   </Layout>
 </template>
 <script>
+import { setDragarea } from '@/libs/util/'
 export default {
-
+  mounted () {
+    setDragarea(this)
+  }
 }
 </script>
 <style lang="less" scoped>

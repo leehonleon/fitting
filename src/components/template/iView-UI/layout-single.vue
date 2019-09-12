@@ -4,12 +4,10 @@
   </Layout>
 </template>
 <script>
+import { setDragarea } from '@/libs/util/'
 export default {
-  props: {
-  },
-  components: {
-  },
-  computed: {
+  mounted () {
+    setDragarea(this)
   }
 }
 </script>
