@@ -1,28 +1,28 @@
 <template>
-  <component ref="innerComponet" :is="currentTabComponent" :path="path+''">
-    <template v-slot:[name] v-for="(task,name) in slots">
+  <component ref="innerComponent" :is="currentTabComponent" :path="path">
+    <template v-for="(task,name) in slots" v-slot:[name]>
       <template v-if="typeof task === 'string'">{{task}}</template>
       <template v-else>
-        <StageComponetBridge v-for="(element,index) in task" :key="index" :path="path+','+index" :idx="element.idx" :slots="element.slots" />
+        <StageComponentBridge v-for="(element,index) in task" :key="index" :path="cumputePath(name,index)" :module="element.module" :slots="element.slots" />
       </template>
     </template>
 
   </component>
 </template>
 <script>
-// <div ref="bridge" class="stage-componet-bridge">
+// <div ref="bridge" class="stage-component-bridge">
 // </div>
 import Vue from 'vue';
 import draggable from "vuedraggable";
 import { getUuid } from '@/libs/util'
 export default {
-  name: 'StageComponetBridge',
+  name: 'StageComponentBridge',
   components: {
     draggable
   },
   // 接收参数并验证
   props: {
-    idx: {
+    module: {
       type: String,
       default: ''
     },
@@ -48,25 +48,25 @@ export default {
     hasComponent (compName) {
       return this.$root.$options.components[compName]
     },
-    overBridge () {
-      this.over = true
-    },
-    outBridge () {
-      this.over = false
-    },
+    cumputePath (name, index) {
+      let res = [...this.path]
+      res.push(name)
+      res.push(index + "")
+      return res
+    }
   },
   computed: {
     getId () {
       return getUuid()
     },
     currentTabComponent () {
-      let idx = this.idx
-      if (!this.hasComponent(idx)) {
-        Vue.component(idx, function (resolve) {
-          require(['_c/template/iView-UI/' + idx + '.vue'], resolve)
+      let module = this.module
+      if (!this.hasComponent(module)) {
+        Vue.component(module, function (resolve) {
+          require(['_c/template/iView-UI/' + module + '.vue'], resolve)
         })
       }
-      return this.idx
+      return this.module
     }
   },
   watch: {

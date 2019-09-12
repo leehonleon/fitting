@@ -13,8 +13,8 @@
     </Card>
     <div class="icon-group">
       <!---->
-      <div class="item" v-for="oneType of typeList" :key="oneType.idx" :componetName="oneType.componetName">
-        <Button class="icon" @click="choseItem(oneType.idx)">
+      <div class="item" v-for="oneType of typeList" :key="oneType.id" :componentName="oneType.componentName">
+        <Button class="icon" @click="choseItem(oneType.id)">
           <Icon :custom="oneType.icon" size="44" />
           <div class="text"> {{ oneType.itemName }} </div>
         </Button>
@@ -26,7 +26,7 @@
         返回
       </Button>
       <Draggable class="list-wrap" :list="wrapItemList" :sort="false" :group="{ name: 'stage', pull: 'clone', put: 'false' }">
-        <div class="list-item ng-star-inserted" v-for="wrapItem of wrapItemList" :key="wrapItem.index">
+        <div class="list-item ng-star-inserted" v-for="(wrapItem, index) of wrapItemList" :key="index">
           <img :src="`${imgPath}/${wrapItem.src}`" style="object-fit: contain;">
           <span class="img-info-btn"><i class="wrapItem.icon"></i></span>
         </div>
@@ -50,74 +50,75 @@ export default {
       imgPath: process.env.BASE_URL + 'static',
       detailContent: false,
       typeList: [
-        { idx: "grid", icon: "ivu-icon ivu-icon-ios-grid-outline", componetName: "Grid", itemName: "栅格" },
-        { idx: "layut", icon: "ivu-icon ivu-icon-ios-browsers-outline", componetName: "Layout", itemName: "布局" },
-        { idx: "card", icon: "ivu-icon ivu-icon-ios-card-outline", componetName: "Card", itemName: "卡片" },
-        { idx: "collapse", icon: "ivu-icon ivu-icon-ios-albums-outline", componetName: "Collapse", itemName: "折叠面板" },
-        { idx: "split", icon: "ivu-icon ivu-icon-ios-square-outline", componetName: "Split", itemName: "面板分割" },
-        { idx: "divider", icon: "ivu-icon ivu-icon-ios-remove", componetName: "Divider", itemName: "分割线" },
-        { idx: "cell", icon: "ivu-icon ivu-icon-ios-list-box-outline", componetName: "Cell", itemName: "单元格" }],
+        { id: "grid", icon: "ivu-icon ivu-icon-ios-grid-outline", componentName: "Grid", itemName: "栅格" },
+        { id: "layout", icon: "ivu-icon ivu-icon-ios-browsers-outline", componentName: "Layout", itemName: "布局" },
+        { id: "card", icon: "ivu-icon ivu-icon-ios-card-outline", componentName: "Card", itemName: "卡片" },
+        { id: "collapse", icon: "ivu-icon ivu-icon-ios-albums-outline", componentName: "Collapse", itemName: "折叠面板" },
+        { id: "split", icon: "ivu-icon ivu-icon-ios-square-outline", componentName: "Split", itemName: "面板分割" },
+        { id: "divider", icon: "ivu-icon ivu-icon-ios-remove", componentName: "Divider", itemName: "分割线" },
+        { id: "cell", icon: "ivu-icon ivu-icon-ios-list-box-outline", componentName: "Cell", itemName: "单元格" }],
       wrapItemListAll: {
         grid: [
-          { idx: "layout-szx", src: "snipaste_20190829_171233.png", name: "layout-szx" },
-          { idx: "layout-szzx", src: "snipaste_20190829_171358.png", name: "layout-szzx" },
-          { idx: "layout-syzx", src: "snipaste_20190829_171342.png", name: "layout-syzx" },
-          { idx: "layout-zszx", src: "snipaste_20190829_172038.png", name: "layout-zszx" }
+          { module: "layout-szx", src: "snipaste_20190829_171233.png", name: "layout-szx" },
+          { module: "layout-szzx", src: "snipaste_20190829_171358.png", name: "layout-szzx" },
+          { module: "layout-syzx", src: "snipaste_20190829_171342.png", name: "layout-syzx" },
+          { module: "layout-zszx", src: "snipaste_20190829_172038.png", name: "layout-zszx" }
         ],
-        layut: [
+        layout: [
           {
-            idx: "layout-single", src: "snipaste_20190905_220042.png", name: "layout-single",
-            slots:
-            {
-              "content":
-                [{ idx: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header", },
-                { idx: "layout-sider-left", src: "snipaste_20190905_220655.png", name: "layout-sider-left", slots: {} },
-                { idx: "layout-footer", src: "snipaste_20190905_220010.png", name: "layout-footer", slots: {} }]
-              , contents:
-                [{ idx: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header", },
-                { idx: "layout-sider-left", src: "snipaste_20190905_220655.png", name: "layout-sider-left", slots: {} },
-                { idx: "layout-footer", src: "snipaste_20190905_220010.png", name: "layout-footer", slots: {} }]
-            }
+            module: "layout-single", src: "snipaste_20190905_220042.png", name: "layout-single",
+            // slots:
+            // {
+            //   default:
+            //     [{ module: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header", },
+            //     { module: "layout-sider-left", src: "snipaste_20190905_220655.png", name: "layout-sider-left", slots: {} },
+            //     { module: "layout-footer", src: "snipaste_20190905_220010.png", name: "layout-footer", slots: {} }]
+            //   , contents:
+            //     [{ module: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header", },
+            //     { module: "layout-sider-left", src: "snipaste_20190905_220655.png", name: "layout-sider-left", slots: {} },
+            //     { module: "layout-footer", src: "snipaste_20190905_220010.png", name: "layout-footer", slots: {} }]
+            // }
           },
-          { idx: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header" },
+          { module: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header" },
           {
-            idx: "layout-content", src: "snipaste_20190905_215926.png", name: "layout-content", slots:
-            {
+            module: "layout-content", src: "snipaste_20190905_215926.png", name: "layout-content",
+            slots: {
               default: [
-                { idx: "Button", name: "Button", slots: { default: 'Default' } }]
+                { module: "Button", name: "Button", slots: { default: 'Default' } }]
             },
           },
-          { idx: "layout-footer", src: "snipaste_20190905_220010.png", name: "layout-footer" },
+          { module: "layout-footer", src: "snipaste_20190905_220010.png", name: "layout-footer" },
           {
-            idx: "layout-sider-left", src: "snipaste_20190905_220655.png", name: "layout-sider-left", slots:
-            {
+            module: "layout-sider-left", src: "snipaste_20190905_220655.png", name: "layout-sider-left",
+            slots: {
               content: [
-                { idx: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header", },
-                { idx: "layout-content", src: "snipaste_20190905_215926.png", name: "layout-content" },
-                { idx: "layout-footer", src: "snipaste_20190905_220010.png", name: "layout-footer" },],
-              sider: [{ idx: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header", },]
+                { module: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header", },
+                { module: "layout-content", src: "snipaste_20190905_215926.png", name: "layout-content" },
+                { module: "layout-footer", src: "snipaste_20190905_220010.png", name: "layout-footer" },],
+              sider: [{ module: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header", },]
             }
           },
-          { idx: "layout-sider-right", src: "snipaste_20190905_220655.png", name: "layout-sider-right", },
-          { idx: "layout-szx", src: "snipaste_20190829_171233.png", name: "layout-szx", },
-          { idx: "layout-szzx", src: "snipaste_20190829_171358.png", name: "layout-szzx", },
-          { idx: "layout-syzx", src: "snipaste_20190829_171342.png", name: "layout-syzx", },
-          { idx: "layout-zszx", src: "snipaste_20190829_172038.png", name: "layout-zszx", }
+          { module: "layout-sider-right", src: "snipaste_20190905_220655.png", name: "layout-sider-right", },
+          { module: "layout-szx", src: "snipaste_20190829_171233.png", name: "layout-szx", },
+          { module: "layout-szzx", src: "snipaste_20190829_171358.png", name: "layout-szzx", },
+          { module: "layout-syzx", src: "snipaste_20190829_171342.png", name: "layout-syzx", },
+          { module: "layout-zszx", src: "snipaste_20190829_172038.png", name: "layout-zszx", },
+          { module: "Button", src: "snipaste_20190912_132244.png", name: "Button", slots: { default: 'Default' } }
         ],
         card: [
-          { idx: "szx", src: "snipaste_20190829_171233.png", name: "" }
+          { module: "szx", src: "snipaste_20190829_171233.png", name: "" }
         ],
         collapse: [
-          { idx: "szx", src: "snipaste_20190829_171233.png", name: "" }
+          { module: "szx", src: "snipaste_20190829_171233.png", name: "" }
         ],
         split: [
-          { idx: "szx", src: "snipaste_20190829_171233.png", name: "" }
+          { module: "szx", src: "snipaste_20190829_171233.png", name: "" }
         ],
         divider: [
-          { idx: "szx", src: "snipaste_20190829_171233.png", name: "" }
+          { module: "szx", src: "snipaste_20190829_171233.png", name: "" }
         ],
         cell: [
-          { idx: "szx", src: "snipaste_20190829_171233.png", name: "" }
+          { module: "szx", src: "snipaste_20190829_171233.png", name: "" }
         ],
       },
       wrapItemList: []

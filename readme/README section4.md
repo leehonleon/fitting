@@ -17,17 +17,17 @@
 
 经过实验,仍然不能满足要求。所以问题仍在。
 
-## 转折~~~里程碑： 使用嵌套的StageComponetBridge加slot的结构，实现了数据模型转动态组件解析。
-查看`stage-componet-bridge.vue`如下面代码，配合数据1，非常漂亮的完成了模板嵌套渲染和默认slot的显示。    
+## 转折~~~里程碑： 使用嵌套的StageComponentBridge加slot的结构，实现了数据模型转动态组件解析。
+查看`stage-component-bridge.vue`如下面代码，配合数据1，非常漂亮的完成了模板嵌套渲染和默认slot的显示。    
 代码
   ```html
-    <component ref="innerComponet" :is="currentTabComponent">
+    <component ref="innerComponent" :is="currentTabComponent">
       <template v-slot="name" v-for="(task,name) of slots">
         <template v-if="typeof task ==='string'">
           {{task}}
         </template>
         <template v-else>
-          <StageComponetBridge v-for="(element,index) in task" :key="index" :idx="element.idx" :slots="element.slots" />
+          <StageComponentBridge v-for="(element,index) in task" :key="index" :idx="element.idx" :slots="element.slots" />
         </template>
       </template>
     </component>

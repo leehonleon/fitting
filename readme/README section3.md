@@ -33,11 +33,11 @@ side-menu中通过路由载入了cLayout.vue, cLayout使用:list="wrapItemList" 
 `:list="stageComponents"` 是这个区域的实际数据，当然就是为了接收拖拽过来的数据用的。是不是传值问题也解决了。真聪明   
 ```html
   <draggable class="stage-panel" group="stage" :list="stageComponents">
-    <StageComponetBridge v-for="(element,index) in stageComponents" :key="index" :idx="element.idx" />
+    <StageComponentBridge v-for="(element,index) in stageComponents" :key="index" :idx="element.idx" />
   </draggable>
 ```
 
-`<StageComponetBridge/>` 组件干啥的？ 这不是就是拖拽来的数据的新表现形式么。   
+`<StageComponentBridge/>` 组件干啥的？ 这不是就是拖拽来的数据的新表现形式么。   
 我用它来装在IViewUI组件模板    
 
 到这里拖拽其实就完成了。
@@ -48,13 +48,13 @@ side-menu中通过路由载入了cLayout.vue, cLayout使用:list="wrapItemList" 
 
 ```javascript
 <template>
-  <div class="stage-componet-bridge" :id="getId">
+  <div class="stage-component-bridge" :id="getId">
     <component :is="currentTabComponent"/>
   </div>
 </template>
 import Vue from 'vue';
 export default {
-  name: 'StageComponetBridge',
+  name: 'StageComponentBridge',
   computed: {
     getId () {
       return getUuid()

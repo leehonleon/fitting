@@ -1,9 +1,9 @@
 <template>
-  <Layout>
-    <Content>
+  <Layout slotname='base' :path="path">
+    <Content dragarea slotname='content' :path="path+','+'content'">
       <slot name="sontent">Content</slot>
     </Content>
-    <Sider hide-trigger>
+    <Sider hide-trigger dragarea="ivu-layout-sider-children" slotname='sider' :path="path+','+'sider'">
       <slot name="sider">Sider</slot>
     </Sider>
   </Layout>
@@ -11,10 +11,16 @@
 <script>
 export default {
   props: {
+    path: {
+      required: true
+    }
   },
   components: {
   },
   computed: {
+  },
+  mounted () {
+    window.console.log(this.$scopedSlots)
   }
 }
 </script>

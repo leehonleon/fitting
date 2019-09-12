@@ -2,7 +2,7 @@
   <div class="stage-container">
     <vue-ruler-tool :content-layout="{left:0,top:0}" :is-scale-revise="true" :is-hot-key="true">
       <Draggable class="stage-panel" :list="stageComponents" :group="{ name: 'stage' }">
-        <StageComponetBridge v-for="(element,index) in stageComponents" :key="index" :path="index" :idx="element.idx" :slots="element.slots" />
+        <StageComponentBridge v-for="(element,index) in stageComponents" :key="index" :path="[index+'']" :module="element.module" :slots="element.slots" />
       </Draggable>
     </vue-ruler-tool>
   </div>
@@ -13,14 +13,14 @@ import VueRulerTool from '../vue-ruler-tool.vue'
 import Draggable from '@/libs/inner-draggable/draggable'
 // import NestedDraggable from '@/components/club/nested.vue'
 // import Draggable from 'vuedraggable'
-import StageComponetBridge from './stage-componet-bridge.vue'
+import StageComponentBridge from './stage-component-bridge.vue'
 export default {
   name: 'StageContainer',
   components: {
     VueRulerTool,
     Draggable,
     // NestedDraggable
-    StageComponetBridge
+    StageComponentBridge
 
   },
   // 接收参数并验证

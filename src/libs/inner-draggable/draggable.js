@@ -351,14 +351,14 @@ const draggableComponent = {
             // const newIndex = evt.newIndex;
             // this.spliceList(newIndex, 0, element);
             // this.computeIndexes();
-            let newIndex = 0;
-            const added = {
-              element,
-              newIndex
-            };
-            this.emitChanges({
-              added
-            });
+            // let newIndex = 0;
+            // const added = {
+            //   element,
+            //   newIndex
+            // };
+            // this.emitChanges({
+            //   added
+            // });
           },
         });
         new Sortable(evt.target, options);

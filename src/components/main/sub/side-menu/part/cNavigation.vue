@@ -13,7 +13,7 @@
     </Card>
     <div class="icon-group">
       <!---->
-      <div class="item" v-for="oneType of typeList" :key="oneType.idx" :componetName="oneType.componetName">
+      <div class="item" v-for="oneType of typeList" :key="oneType.idx" :componentName="oneType.componentName">
         <Button class="icon" @click="detailContent = true">
           <Icon :custom="oneType.icon" size="44" />
           <div class="text"> {{ oneType.itemName }} </div>
@@ -56,15 +56,15 @@ export default {
     return {
       detailContent: false,
       typeList: [
-        { idx: "menu", icon: "ivu-icon ivu-icon-ios-menu", componetName: "Menu", itemName: "导航菜单" },
-        { idx: "tabs", icon: "ivu-icon ivu-icon-ios-more-outline", componetName: "Tabs", itemName: "标签页" },
-        { idx: "dropdown", icon: "ivu-icon ivu-icon-md-arrow-dropdown", componetName: "Dropdown", itemName: "下拉菜单" },
-        { idx: "page", icon: "ivu-icon ivu-icon-ios-book-outline", componetName: "Page", itemName: "分页" },
-        { idx: "breadcrumb", icon: "ivu-icon ivu-icon-ios-arrow-forward", componetName: "Breadcrumb", itemName: "面包屑" },
-        { idx: "badge", icon: "ivu-icon ivu-icon-md-square", componetName: "Badge", itemName: "徽标数" },
-        { idx: "anchor", icon: "ivu-icon ivu-icon-md-link", componetName: "Anchor", itemName: "锚点" },
-        { idx: "steps", icon: "ivu-icon ivu-icon-ios-checkmark-circle-outline", componetName: "Steps", itemName: "步骤条" },
-        { idx: "loading-bar", icon: "iconfont icon-jindutiao", componetName: "LoadingBar", itemName: "进度条" }
+        { idx: "menu", icon: "ivu-icon ivu-icon-ios-menu", componentName: "Menu", itemName: "导航菜单" },
+        { idx: "tabs", icon: "ivu-icon ivu-icon-ios-more-outline", componentName: "Tabs", itemName: "标签页" },
+        { idx: "dropdown", icon: "ivu-icon ivu-icon-md-arrow-dropdown", componentName: "Dropdown", itemName: "下拉菜单" },
+        { idx: "page", icon: "ivu-icon ivu-icon-ios-book-outline", componentName: "Page", itemName: "分页" },
+        { idx: "breadcrumb", icon: "ivu-icon ivu-icon-ios-arrow-forward", componentName: "Breadcrumb", itemName: "面包屑" },
+        { idx: "badge", icon: "ivu-icon ivu-icon-md-square", componentName: "Badge", itemName: "徽标数" },
+        { idx: "anchor", icon: "ivu-icon ivu-icon-md-link", componentName: "Anchor", itemName: "锚点" },
+        { idx: "steps", icon: "ivu-icon ivu-icon-ios-checkmark-circle-outline", componentName: "Steps", itemName: "步骤条" },
+        { idx: "loading-bar", icon: "iconfont icon-jindutiao", componentName: "LoadingBar", itemName: "进度条" }
       ]
     }
   },

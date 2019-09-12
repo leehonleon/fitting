@@ -1,14 +1,14 @@
 <template>
   <draggable tag="drag" :list="tasks" :group="{ name: 'stage' }">
     <template v-if="tasks.length != 0">
-      <StageComponetBridge v-for="(element,index) in tasks" :key="index" :idx="element.idx" :tasks="element.tasks" />
+      <StageComponentBridge v-for="(element,index) in tasks" :key="index" :idx="element.idx" :tasks="element.tasks" />
     </template>
     <template v-if="tasks.length === 0">{{placeholder}}</template>
   </draggable>
 </template>
 <script>
 import draggable from "vuedraggable";
-import StageComponetBridge from '../main/sub/stage-container/stage-componet-bridge.vue'
+import StageComponentBridge from '../main/sub/stage-container/stage-component-bridge.vue'
 import el from './el.vue'
 export default {
   props: {
@@ -23,7 +23,7 @@ export default {
   },
   components: {
     draggable,
-    StageComponetBridge,
+    StageComponentBridge,
     el
   },
   name: "nested-draggable"

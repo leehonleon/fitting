@@ -1,5 +1,5 @@
 <template>
-  <Layout style="height: 100%; background-color:black;" dragarea>
+  <Layout style="height: 100%; background-color:black;" dragarea slotname='base' :path="path">
     <slot>Layout</slot>
   </Layout>
 </template>
