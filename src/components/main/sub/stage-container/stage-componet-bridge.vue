@@ -1,13 +1,12 @@
 <template>
-  <component ref="innerComponet" :is="currentTabComponent">
-    <template v-slot="name" v-for="(task,name) of slots">
-      <template v-if="typeof task ==='string'">
-        {{task}}
-      </template>
+  <component ref="innerComponet" :is="currentTabComponent" :path="path+''">
+    <template v-slot:[name] v-for="(task,name) in slots">
+      <template v-if="typeof task === 'string'">{{task}}</template>
       <template v-else>
-        <StageComponetBridge v-for="(element,index) in task" :key="index" :idx="element.idx" :slots="element.slots" />
+        <StageComponetBridge v-for="(element,index) in task" :key="index" :path="path+','+index" :idx="element.idx" :slots="element.slots" />
       </template>
     </template>
+
   </component>
 </template>
 <script>
@@ -26,6 +25,9 @@ export default {
     idx: {
       type: String,
       default: ''
+    },
+    path: {
+      required: true
     },
     slots: {
       default: ''

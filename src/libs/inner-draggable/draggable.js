@@ -1,5 +1,10 @@
 import Sortable from "sortablejs";
-import { insertNodeAt, camelize, console, removeNode } from "./util/helper";
+import {
+  insertNodeAt,
+  camelize,
+  console,
+  removeNode
+} from "./util/helper";
 
 function buildAttribute(object, propName, value) {
   if (value === undefined) {
@@ -54,7 +59,9 @@ function isTransition(slots) {
   if (!slots || slots.length !== 1) {
     return false;
   }
-  const [{ componentOptions }] = slots;
+  const [{
+    componentOptions
+  }] = slots;
   if (!componentOptions) {
     return false;
   }
@@ -93,6 +100,7 @@ function bindAttributes(attributes, bind) {
   update("on", bind);
   return attributes;
 }
+
 function getComponentAttributes($attrs, componentData) {
   let attributes = null;
   const update = (name, value) => {
@@ -109,7 +117,11 @@ function getComponentAttributes($attrs, componentData) {
   if (!componentData) {
     return attributes;
   }
-  const { on, props, attrs: componentDataAttrs } = componentData;
+  const {
+    on,
+    props,
+    attrs: componentDataAttrs
+  } = componentData;
   update("on", on);
   update("props", props);
   Object.assign(attributes.attrs, componentDataAttrs);
@@ -172,13 +184,19 @@ const draggableComponent = {
   props,
 
   data() {
-    return {};
+    return {
+      optionset: ''
+    };
   },
 
   render(h) {
     const slots = this.$slots.default;
     this.transitionMode = isTransition(slots);
-    const { children, headerOffset, footerOffset } = computeChildrenAndOffsets(
+    const {
+      children,
+      headerOffset,
+      footerOffset
+    } = computeChildrenAndOffsets(
       slots,
       this.$slots,
       this.$scopedSlots
@@ -246,7 +264,7 @@ const draggableComponent = {
     !("draggable" in options) && (options.draggable = ">*");
 
     // 注册sortable
-    // this._sortable = new Sortable(this.rootContainer, options);
+    this._sortable = new Sortable(this.rootContainer, options);
     this.computeIndexes();
   },
 
@@ -287,15 +305,70 @@ const draggableComponent = {
   methods: {
     bindEvent() {
       return {
-        // 这里是原生绑定，和 只能Dom操作
-        dragenter: event => {
-          event.target.style.background = "purple";
-        }
+        // 绑定VUE操作
+        dragenter: this.dragEnter
       };
+    },
+    dragEnter(evt) {
+      if (evt.target.attributes.dragarea && evt.target) {
+        evt.target.style.background = "purple";
+        // 等到所有组件属性，并配装成对象，应该是用作sortable的option
+        const attributes = Object.keys(this.$attrs).reduce((res, key) => {
+          res[camelize(key)] = this.$attrs[key];
+          return res;
+        }, {});
+
+        // 组装所有option
+        const options = Object.assign({}, this.options, attributes, {
+          onMove: (evt, originalEvent) => {
+            return this.onDragMove(evt, originalEvent);
+          },
+          onStart: (evt) => {
+            this.context = this.getUnderlyingVm(evt.item);
+            evt.item._underlying_vm_ = this.clone(this.context.element);
+            draggingElement = evt.item;
+          },
+
+          onAdd: (evt) => {
+            const element = evt.item._underlying_vm_;
+            if (element === undefined) {
+              return;
+            }
+            removeNode(evt.item); // 删除原生事件添加的节点。
+            // 获取当前节点位置
+            let slotname = evt.target.attributes.slotname
+            window.console.log(slotname)
+            const to = evt.to.__vue__
+            const path = this.getRealPath(to);
+            const component = this.getRealBaseComponent(to);
+            window.console.log(path)
+            slotname = to.$attrs.slotname
+            let node = {}
+            node[slotname] = [element]
+            component.list[path[0]].slots = Object.assign(component.list[path[0]].slots || {}, node);
+
+            // const newIndex = this.getVmIndex(evt.newIndex);
+            // const newIndex = evt.newIndex;
+            // this.spliceList(newIndex, 0, element);
+            // this.computeIndexes();
+            let newIndex = 0;
+            const added = {
+              element,
+              newIndex
+            };
+            this.emitChanges({
+              added
+            });
+          },
+        });
+        new Sortable(evt.target, options);
+      }
     },
     // 用于判断是否是组件类
     getIsFunctional() {
-      const { fnOptions } = this._vnode;
+      const {
+        fnOptions
+      } = this._vnode;
       return fnOptions && fnOptions.functional;
     },
 
@@ -351,7 +424,9 @@ const draggableComponent = {
       };
     },
 
-    getUnderlyingPotencialDraggableComponent({ __vue__: vue }) {
+    getUnderlyingPotencialDraggableComponent({
+      __vue__: vue
+    }) {
       if (
         !vue ||
         !vue.$options ||
@@ -367,6 +442,32 @@ const draggableComponent = {
         return vue;
       }
       return vue.$parent;
+    },
+
+    getRealBaseComponent(vue) {
+      if (!(
+          !vue ||
+          !vue.$options
+        )) {
+        if ("realList" in vue) {
+          return vue;
+        }
+      }
+      return this.getRealBaseComponent(vue.$parent);
+    },
+
+    getRealPath(vue) {
+      let path = [0]
+      if (vue) {
+        if (vue.$attrs.slotname === "base") {
+          path = vue.$attrs.path.split(',', 100)
+          return path
+        } else {
+          return this.getRealPath(vue.$parent)
+        }
+      } else {
+        return path
+      }
     },
 
     // DOM更新后再出发Change时间
@@ -402,7 +503,10 @@ const draggableComponent = {
       this.alterList(updatePosition);
     },
 
-    getRelatedContextFromMoveEvent({ to, related }) {
+    getRelatedContextFromMoveEvent({
+      to,
+      related
+    }) {
       const component = this.getUnderlyingPotencialDraggableComponent(to);
       if (!component) {
         return {
@@ -518,9 +622,9 @@ const draggableComponent = {
       const currentDOMIndex = domChildren.indexOf(evt.related);
       const currentIndex = relatedContext.component.getVmIndex(currentDOMIndex);
       const draggedInList = domChildren.indexOf(draggingElement) !== -1;
-      return draggedInList || !evt.willInsertAfter
-        ? currentIndex
-        : currentIndex + 1;
+      return draggedInList || !evt.willInsertAfter ?
+        currentIndex :
+        currentIndex + 1;
     },
 
     onDragMove(evt, originalEvent) {

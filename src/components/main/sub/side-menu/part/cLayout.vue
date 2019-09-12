@@ -69,16 +69,35 @@ export default {
             idx: "layout-single", src: "snipaste_20190905_220042.png", name: "layout-single",
             slots:
             {
-              default:
+              "content":
+                [{ idx: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header", },
+                { idx: "layout-sider-left", src: "snipaste_20190905_220655.png", name: "layout-sider-left", slots: {} },
+                { idx: "layout-footer", src: "snipaste_20190905_220010.png", name: "layout-footer", slots: {} }]
+              , contents:
                 [{ idx: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header", },
                 { idx: "layout-sider-left", src: "snipaste_20190905_220655.png", name: "layout-sider-left", slots: {} },
                 { idx: "layout-footer", src: "snipaste_20190905_220010.png", name: "layout-footer", slots: {} }]
             }
           },
           { idx: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header" },
-          { idx: "layout-content", src: "snipaste_20190905_215926.png", name: "layout-content" },
+          {
+            idx: "layout-content", src: "snipaste_20190905_215926.png", name: "layout-content", slots:
+            {
+              default: [
+                { idx: "Button", name: "Button", slots: { default: 'Default' } }]
+            },
+          },
           { idx: "layout-footer", src: "snipaste_20190905_220010.png", name: "layout-footer" },
-          { idx: "layout-sider-left", src: "snipaste_20190905_220655.png", name: "layout-sider-left", },
+          {
+            idx: "layout-sider-left", src: "snipaste_20190905_220655.png", name: "layout-sider-left", slots:
+            {
+              content: [
+                { idx: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header", },
+                { idx: "layout-content", src: "snipaste_20190905_215926.png", name: "layout-content" },
+                { idx: "layout-footer", src: "snipaste_20190905_220010.png", name: "layout-footer" },],
+              sider: [{ idx: "layout-header", src: "snipaste_20190905_220351.png", name: "layout-header", },]
+            }
+          },
           { idx: "layout-sider-right", src: "snipaste_20190905_220655.png", name: "layout-sider-right", },
           { idx: "layout-szx", src: "snipaste_20190829_171233.png", name: "layout-szx", },
           { idx: "layout-szzx", src: "snipaste_20190829_171358.png", name: "layout-szzx", },
