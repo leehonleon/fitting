@@ -9,6 +9,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     //
+    sidename: 'layout'
   },
   mutations: {
     //

@@ -18,7 +18,7 @@
     </Menu>
     <Layout>
       <Sider collapsible :width="356" :collapsed-width="44" v-model="collapsed">
-        <SideMenu accordion ref="sideMenu" :active-name="$store.state.sidename" :collapsed="collapsed" :sidemenuList="sidemenuList" @on-change="sideMenuSelect" />
+        <SideMenu accordion ref="sideMenu" :activeMenuName="$store.state.sidename" :collapsed="collapsed" :sidemenuList="sidemenuList" @on-change="sideMenuSelect" />
       </Sider>
       <Layout>
         <Stage />
@@ -38,7 +38,7 @@ export default {
   },
   data () {
     return {
-      collapsed: true,
+      collapsed: false,
     }
   },
   computed: {

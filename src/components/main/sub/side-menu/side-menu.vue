@@ -3,9 +3,9 @@
     <slot></slot>
     <Layout :style="{minHeight: '100vh'}">
       <Sider width="44">
-        <Menu mode="horizontal" theme="dark" :active-name="activeMenuName" active-key="1" width="auto" class="css_menu_left" @on-select="handleSelect">
+        <Menu mode="horizontal" theme="dark" :active-name="activeMenuName" width="auto" class="css_menu_left" @on-select="handleSelect">
           <template v-for="item in sidemenuList">
-            <MenuItem :key="item.name" :name="item.name" :handle="item">
+            <MenuItem :key="item.name" :name="item.name">
             <Icon :custom="item.meta.icon" size="24" />
             </MenuItem>
           </template>
@@ -78,6 +78,7 @@ export default {
   watch: {
   },
   mounted () {
+    this.handleSelect(this.activeMenuName)
   }
 }
 </script>
