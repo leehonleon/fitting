@@ -174,7 +174,8 @@ const draggableComponent = {
 
   data() {
     return {
-      optionset: ""
+      optionset: "",
+      targetList: []
     };
   },
 
@@ -330,27 +331,26 @@ const draggableComponent = {
                 evt.target.attributes.slotname == undefined
                   ? "default"
                   : evt.target.attributes.slotname.value;
-              window.console.log(slotname);
               const to = evt.target.__vue__;
               const path = this.getRealPath(to);
               const component = this.getRealBaseComponent(to);
-              window.console.log(path);
-              let node = {};
-              node[slotname] = [element];
-              let { ...o } = component.list[path[0]];
-              o.slots = Object.assign(o.slots || {}, node);
-              // const newIndex = this.getVmIndex(evt.newIndex);
-              const newIndex = path[0];
-              component.spliceList(path[0], 0, o);
-              // component.computeIndexes();
-              // let newIndex = 0;
-              const added = {
-                o,
-                newIndex
-              };
-              component.emitChanges({
-                added
-              });
+
+              component.addSlots(path, slotname, evt.newIndex, element);
+            } else if (
+              evt.target.attributes.dragarea != undefined &&
+              evt.target.attributes.dragarea.value === "" &&
+              typeof evt.target.attributes.originel == "object"
+            ) {
+              window.console.log(evt.target.attributes.originel.value);
+              const originEl = this.getParentVue(evt.target);
+              let slotname =
+                originEl.attributes.slotname == undefined
+                  ? "default"
+                  : originEl.attributes.slotname.value;
+              const to = originEl.__vue__;
+              const path = this.getRealPath(to);
+              const component = this.getRealBaseComponent(to);
+              component.addSlots(path, slotname, evt.newIndex, element);
             }
           }
         });
@@ -459,6 +459,13 @@ const draggableComponent = {
       }
     },
 
+    getParentVue(el) {
+      if (el.__vue__ != undefined) {
+        return el;
+      }
+      return this.getParentVue(el.parentNode);
+    },
+
     // DOM更新后再出发Change时间
     emitChanges(evt) {
       // 将回调延迟到下次 DOM 更新循环之后执行。
@@ -468,21 +475,52 @@ const draggableComponent = {
       });
     },
 
+    // 变更节点属性
+    addSlots(pathOrigin, slotname, index, element) {
+      let path = [...pathOrigin];
+      let targetList = this.getTargetList(path);
+      let baseIndex = path[0];
+
+      let baseTarget = Object.assign(this.getTargetList([path[0]]));
+      if (targetList.slots == undefined) {
+        let node = {};
+        node[slotname] = [element];
+        targetList.slots = node;
+        this.spliceList(baseIndex, 1, baseTarget);
+      } else {
+        path.push(slotname);
+        targetList = this.getTargetList(path);
+        targetList.splice(index, 0, element);
+        this.spliceList(baseIndex, 1, baseTarget);
+      }
+    },
+
     // 更改组件的list属性
     alterList(onList) {
       if (this.list) {
-        onList(this.list);
-        return;
+        return onList(this.list);
       }
       const newList = [...this.value];
       onList(newList);
       this.$emit("input", newList);
     },
+    // 取到子节点的list
+    getTargetList(path) {
+      let targetList = this.list;
+      for (let index = 0; index < path.length; index++) {
+        if (index % 2 == 0) {
+          targetList = targetList[path[index]];
+        } else {
+          targetList = targetList.slots[path[index]];
+        }
+      }
+      return targetList;
+    },
 
     // 更改组件的list属性
     spliceList() {
       const spliceList = list => list.splice(...arguments); // arguments 调用该函数时的所有参数。 用意就是调用spliceList和splice的参数一致。
-      this.alterList(spliceList);
+      return this.alterList(spliceList);
     },
 
     // 更改组件的list属性

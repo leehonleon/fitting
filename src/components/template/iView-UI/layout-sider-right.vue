@@ -1,9 +1,9 @@
 <template>
   <Layout>
-    <Content ref="dragtest" dragarea slotname='content'>
-      <slot name="sontent">Content</slot>
+    <Content dragarea slotname='content'>
+      <slot name="content">Content</slot>
     </Content>
-    <Sider ref="dragtest" hide-trigger dragarea=".ivu-layout-sider-children" slotname='sider'>
+    <Sider hide-trigger dragarea=".ivu-layout-sider-children" slotname='sider'>
       <slot name="sider">Sider</slot>
     </Sider>
   </Layout>
