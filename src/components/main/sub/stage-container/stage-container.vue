@@ -1,7 +1,10 @@
 <template>
   <div class="stage-container">
     <vue-ruler-tool :content-layout="{left:0,top:0}" :is-scale-revise="true" :is-hot-key="true">
-      <Draggable class="stage-panel" :list="stageComponents" :group="{ name: 'stage' }">
+      <Draggable class="stage-panel" :list="stageComponents" :group="{ name: 'stage' }" :options="{
+            swapThreshold: 0.02,
+            invertSwap: true,
+            animation: 150}">
         <StageComponentBridge v-for="(element,index) in stageComponents" :key="index" :path="[index+'']" :module="element.module" :slots="element.slots" />
       </Draggable>
     </vue-ruler-tool>

@@ -1,5 +1,11 @@
-import Sortable from "sortablejs";
-import { insertNodeAt, camelize, console, removeNode } from "./util/helper";
+import Sortable from 'sortablejs';
+import {
+  insertNodeAt,
+  camelize,
+  console,
+  removeNode,
+  newly
+} from './util/helper';
 
 function buildAttribute(object, propName, value) {
   if (value === undefined) {
@@ -40,21 +46,23 @@ function emit(evtName, evtData) {
 function delegateAndEmit(evtName) {
   return evtData => {
     if (this.realList !== null) {
-      this["onDrag" + evtName](evtData);
+      this['onDrag' + evtName](evtData);
     }
     emit.call(this, evtName, evtData);
   };
 }
 
 function isTransitionName(name) {
-  return ["transition-group", "TransitionGroup"].includes(name);
+  return ['transition-group', 'TransitionGroup'].includes(name);
 }
 
 function isTransition(slots) {
   if (!slots || slots.length !== 1) {
     return false;
   }
-  const [{ componentOptions }] = slots;
+  const [{
+    componentOptions
+  }] = slots;
   if (!componentOptions) {
     return false;
   }
@@ -68,12 +76,12 @@ function getSlot(slot, scopedSlot, key) {
 function computeChildrenAndOffsets(children, slot, scopedSlot) {
   let headerOffset = 0;
   let footerOffset = 0;
-  const header = getSlot(slot, scopedSlot, "header");
+  const header = getSlot(slot, scopedSlot, 'header');
   if (header) {
     headerOffset = header.length;
     children = children ? [...header, ...children] : [...header];
   }
-  const footer = getSlot(slot, scopedSlot, "footer");
+  const footer = getSlot(slot, scopedSlot, 'footer');
   if (footer) {
     footerOffset = footer.length;
     children = children ? [...children, ...footer] : [...footer];
@@ -90,7 +98,7 @@ function bindAttributes(attributes, bind) {
     attributes = buildAttribute(attributes, name, value);
   };
 
-  update("on", bind);
+  update('on', bind);
   return attributes;
 }
 
@@ -100,27 +108,31 @@ function getComponentAttributes($attrs, componentData) {
     attributes = buildAttribute(attributes, name, value);
   };
   const attrs = Object.keys($attrs)
-    .filter(key => key === "id" || key.startsWith("data-"))
+    .filter(key => key === 'id' || key.startsWith('data-'))
     .reduce((res, key) => {
       res[key] = $attrs[key];
       return res;
     }, {});
-  update("attrs", attrs);
+  update('attrs', attrs);
 
   if (!componentData) {
     return attributes;
   }
-  const { on, props, attrs: componentDataAttrs } = componentData;
-  update("on", on);
-  update("props", props);
+  const {
+    on,
+    props,
+    attrs: componentDataAttrs
+  } = componentData;
+  update('on', on);
+  update('props', props);
   Object.assign(attributes.attrs, componentDataAttrs);
   return attributes;
 }
 
-const eventsListened = ["Start", "Add", "Remove", "Update", "End"];
-const eventsToEmit = ["Choose", "Unchoose", "Sort", "Filter", "Clone"];
-const readonlyProperties = ["Move", ...eventsListened, ...eventsToEmit].map(
-  evt => "on" + evt
+const eventsListened = ['Start', 'Add', 'Remove', 'Update', 'End'];
+const eventsToEmit = ['Choose', 'Unchoose', 'Sort', 'Filter', 'Clone'];
+const readonlyProperties = ['Move', ...eventsListened, ...eventsToEmit].map(
+  evt => 'on' + evt
 );
 var draggingElement = null;
 
@@ -148,7 +160,7 @@ const props = {
   },
   element: {
     type: String,
-    default: "div"
+    default: 'div'
   },
   tag: {
     type: String,
@@ -166,7 +178,7 @@ const props = {
 };
 
 const draggableComponent = {
-  name: "draggable",
+  name: 'draggable',
 
   inheritAttrs: false,
 
@@ -174,7 +186,7 @@ const draggableComponent = {
 
   data() {
     return {
-      optionset: "",
+      optionset: '',
       targetList: []
     };
   },
@@ -182,7 +194,11 @@ const draggableComponent = {
   render(h) {
     const slots = this.$slots.default;
     this.transitionMode = isTransition(slots);
-    const { children, headerOffset, footerOffset } = computeChildrenAndOffsets(
+    const {
+      children,
+      headerOffset,
+      footerOffset
+    } = computeChildrenAndOffsets(
       slots,
       this.$slots,
       this.$scopedSlots
@@ -197,19 +213,19 @@ const draggableComponent = {
   created() {
     if (this.list !== null && this.value !== null) {
       console.error(
-        "Value and list props are mutually exclusive! Please set one or another."
+        'Value and list props are mutually exclusive! Please set one or another.'
       );
     }
 
-    if (this.element !== "div") {
+    if (this.element !== 'div') {
       console.warn(
-        "Element props is deprecated please use tag props instead. See https://github.com/SortableJS/Vue.Draggable/blob/master/documentation/migrate.md#element-props"
+        'Element props is deprecated please use tag props instead. See https://github.com/SortableJS/Vue.Draggable/blob/master/documentation/migrate.md#element-props'
       );
     }
 
     if (this.options !== undefined) {
       console.warn(
-        "Options props is deprecated, add sortable options directly as vue.draggable item, or use v-bind. See https://github.com/SortableJS/Vue.Draggable/blob/master/documentation/migrate.md#options-props"
+        'Options props is deprecated, add sortable options directly as vue.draggable item, or use v-bind. See https://github.com/SortableJS/Vue.Draggable/blob/master/documentation/migrate.md#options-props'
       );
     }
   },
@@ -226,11 +242,11 @@ const draggableComponent = {
     // 将组件的事件响应function绑定到sortable
     var optionsAdded = {};
     eventsListened.forEach(elt => {
-      optionsAdded["on" + elt] = delegateAndEmit.call(this, elt);
+      optionsAdded['on' + elt] = delegateAndEmit.call(this, elt);
     });
 
     eventsToEmit.forEach(elt => {
-      optionsAdded["on" + elt] = emit.bind(this, elt);
+      optionsAdded['on' + elt] = emit.bind(this, elt);
     });
 
     // 等到所有组件属性，并配装成对象，应该是用作sortable的option
@@ -247,7 +263,7 @@ const draggableComponent = {
     });
 
     // draggable没被设定则设定为">*"
-    !("draggable" in options) && (options.draggable = ">*");
+    !('draggable' in options) && (options.draggable = '>*');
 
     // 注册sortable
     this._sortable = new Sortable(this.rootContainer, options);
@@ -297,7 +313,7 @@ const draggableComponent = {
     },
     dragEnter(evt) {
       if (evt.target.attributes.dragarea && evt.target) {
-        evt.target.style.background = "purple";
+        evt.target.style.background = 'purple';
         // 等到所有组件属性，并配装成对象，应该是用作sortable的option
         const attributes = Object.keys(this.$attrs).reduce((res, key) => {
           res[camelize(key)] = this.$attrs[key];
@@ -324,13 +340,12 @@ const draggableComponent = {
             // 获取当前节点位置
             if (
               evt.target.attributes.dragarea != undefined &&
-              evt.target.attributes.dragarea.value === "" &&
+              evt.target.attributes.dragarea.value === '' &&
               evt.target.attributes.originel == undefined
             ) {
-              let slotname =
-                evt.target.attributes.slotname == undefined
-                  ? "default"
-                  : evt.target.attributes.slotname.value;
+              let slotname = evt.target.attributes.slotname === undefined ?
+                'default' :
+                evt.target.attributes.slotname.nodeValue;
               const to = evt.target.__vue__;
               const path = this.getRealPath(to);
               const component = this.getRealBaseComponent(to);
@@ -338,15 +353,13 @@ const draggableComponent = {
               component.addSlots(path, slotname, evt.newIndex, element);
             } else if (
               evt.target.attributes.dragarea != undefined &&
-              evt.target.attributes.dragarea.value === "" &&
-              typeof evt.target.attributes.originel == "object"
+              evt.target.attributes.dragarea.value === '' &&
+              typeof evt.target.attributes.originel == 'object'
             ) {
-              window.console.log(evt.target.attributes.originel.value);
               const originEl = this.getParentVue(evt.target);
-              let slotname =
-                originEl.attributes.slotname == undefined
-                  ? "default"
-                  : originEl.attributes.slotname.value;
+              let slotname = originEl.attributes.slotname === undefined ?
+                'default' :
+                originEl.attributes.slotname.nodeValue;
               const to = originEl.__vue__;
               const path = this.getRealPath(to);
               const component = this.getRealBaseComponent(to);
@@ -359,7 +372,9 @@ const draggableComponent = {
     },
     // 用于判断是否是组件类
     getIsFunctional() {
-      const { fnOptions } = this._vnode;
+      const {
+        fnOptions
+      } = this._vnode;
       return fnOptions && fnOptions.functional;
     },
 
@@ -415,16 +430,18 @@ const draggableComponent = {
       };
     },
 
-    getUnderlyingPotencialDraggableComponent({ __vue__: vue }) {
+    getUnderlyingPotencialDraggableComponent({
+      __vue__: vue
+    }) {
       if (
         !vue ||
         !vue.$options ||
         !isTransitionName(vue.$options._componentTag)
       ) {
         if (
-          !("realList" in vue) &&
+          !('realList' in vue) &&
           vue.$children.length === 1 &&
-          "realList" in vue.$children[0]
+          'realList' in vue.$children[0]
         )
           return vue.$children[0];
 
@@ -435,7 +452,7 @@ const draggableComponent = {
 
     getRealBaseComponent(vue) {
       if (!(!vue || !vue.$options)) {
-        if ("realList" in vue) {
+        if ('realList' in vue) {
           return vue;
         }
       }
@@ -447,7 +464,7 @@ const draggableComponent = {
       if (vue) {
         if (
           vue.$vnode.tag != undefined &&
-          vue.$vnode.tag.split("-").pop() === "StageComponentBridge"
+          vue.$vnode.tag.split('-').pop() === 'StageComponentBridge'
         ) {
           path = vue.path;
           return path;
@@ -471,21 +488,21 @@ const draggableComponent = {
       // 将回调延迟到下次 DOM 更新循环之后执行。
       this.$nextTick(() => {
         // 触发当前实例上的事件。附加参数都会传给监听器回调。
-        this.$emit("change", evt);
+        this.$emit('change', evt);
       });
     },
 
     // 变更节点属性
     addSlots(pathOrigin, slotname, index, element) {
-      let path = [...pathOrigin];
+      let path = newly(pathOrigin);
       let targetList = this.getTargetList(path);
-      let baseIndex = path[0];
+      let baseIndex = parseInt(path[0]);
 
-      let baseTarget = Object.assign(this.getTargetList([path[0]]));
-      if (targetList.slots == undefined) {
+      let baseTarget = this.getTargetList([path[0]]);
+      if (targetList.slots == undefined || targetList.slots[slotname] === undefined) {
         let node = {};
         node[slotname] = [element];
-        targetList.slots = node;
+        targetList.slots = Object.assign(targetList.slots || {}, node);
         this.spliceList(baseIndex, 1, baseTarget);
       } else {
         path.push(slotname);
@@ -502,7 +519,7 @@ const draggableComponent = {
       }
       const newList = [...this.value];
       onList(newList);
-      this.$emit("input", newList);
+      this.$emit('input', newList);
     },
     // 取到子节点的list
     getTargetList(path) {
@@ -530,7 +547,10 @@ const draggableComponent = {
       this.alterList(updatePosition);
     },
 
-    getRelatedContextFromMoveEvent({ to, related }) {
+    getRelatedContextFromMoveEvent({
+      to,
+      related
+    }) {
       const component = this.getUnderlyingPotencialDraggableComponent(to);
       if (!component) {
         return {
@@ -579,7 +599,7 @@ const draggableComponent = {
     },
 
     onDragAdd(evt) {
-      const element = evt.item._underlying_vm_;
+      const element = Object.assign({}, evt.item._underlying_vm_);
       if (element === undefined) {
         return;
       }
@@ -599,7 +619,7 @@ const draggableComponent = {
 
     onDragRemove(evt) {
       insertNodeAt(this.rootContainer, evt.item, evt.oldIndex);
-      if (evt.pullMode === "clone") {
+      if (evt.pullMode === 'clone') {
         removeNode(evt.clone);
         return;
       }
@@ -641,14 +661,14 @@ const draggableComponent = {
         return 0;
       }
       const domChildren = [...evt.to.children].filter(
-        el => el.style["display"] !== "none"
+        el => el.style['display'] !== 'none'
       );
       const currentDOMIndex = domChildren.indexOf(evt.related);
       const currentIndex = relatedContext.component.getVmIndex(currentDOMIndex);
       const draggedInList = domChildren.indexOf(draggingElement) !== -1;
-      return draggedInList || !evt.willInsertAfter
-        ? currentIndex
-        : currentIndex + 1;
+      return draggedInList || !evt.willInsertAfter ?
+        currentIndex :
+        currentIndex + 1;
     },
 
     onDragMove(evt, originalEvent) {
@@ -677,8 +697,8 @@ const draggableComponent = {
   }
 };
 
-if (typeof window !== "undefined" && "Vue" in window) {
-  window.Vue.component("draggable", draggableComponent);
+if (typeof window !== 'undefined' && 'Vue' in window) {
+  window.Vue.component('draggable', draggableComponent);
 }
 
 export default draggableComponent;

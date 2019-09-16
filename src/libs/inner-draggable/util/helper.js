@@ -28,10 +28,25 @@ function removeNode(node) {
 
 function insertNodeAt(fatherNode, node, position) {
   const refNode =
-    position === 0
-      ? fatherNode.children[0]
-      : fatherNode.children[position - 1].nextSibling;
+    position === 0 ?
+    fatherNode.children[0] :
+    fatherNode.children[position - 1].nextSibling;
   fatherNode.insertBefore(node, refNode);
 }
 
-export { insertNodeAt, camelize, console, removeNode };
+function newly(obj) {
+  if (Array.isArray(obj)) {
+    return [...obj];
+  } else if (typeof obj === 'object') {
+    return Object.assign({}, obj);
+  }
+  return obj;
+}
+
+export {
+  insertNodeAt,
+  camelize,
+  console,
+  removeNode,
+  newly
+};
