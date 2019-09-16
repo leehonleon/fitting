@@ -53,6 +53,9 @@ export default {
       res.push(name)
       res.push(index + "")
       return res
+    },
+    showSheek () {
+      window.alert('a')
     }
   },
   computed: {
