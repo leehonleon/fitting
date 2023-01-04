@@ -21,9 +21,9 @@
   "npm install --save-dev": "",
   "// less + less-loade: 来防止作用域的污染": "",
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.10.0",
+    "@vue/cli-plugin-babel": "^5.0.8",
     "@vue/cli-plugin-eslint": "^3.10.0",
-    "@vue/cli-service": "^3.10.0",
+    "@vue/cli-service": "^5.0.8",
     "axios": "^0.19.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
